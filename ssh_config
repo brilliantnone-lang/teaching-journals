@@ -1,0 +1,4 @@
+Host github-brilliantnone
+    HostName github.com
+    User git
+    IdentityFile C:\Users\ASUS\.ssh\id_ed25519_brilliantnone

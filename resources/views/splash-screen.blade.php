@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jurnal Mengajar Guru</title>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -36,12 +37,13 @@
 
         body {
             background-color: var(--dark-bg);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
             min-height: 100vh;
             width: 100%;
-            overflow-y: auto; /* BISA SCROLL */
+            overflow-y: auto;
+            /* BISA SCROLL */
             display: flex;
             color: var(--text-white);
             padding: 20px 0;
@@ -86,7 +88,9 @@
             backdrop-filter: blur(5px);
         }
 
-        .app-badge i { margin-right: 8px; }
+        .app-badge i {
+            margin-right: 8px;
+        }
 
         h1 {
             font-size: 3rem;
@@ -133,8 +137,14 @@
             box-shadow: 0 20px 40px -10px rgba(67, 97, 238, 0.7);
         }
 
-        .btn-main i { margin-left: 10px; transition: transform 0.3s ease; }
-        .btn-main:hover i { transform: translateX(5px); }
+        .btn-main i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-main:hover i {
+            transform: translateX(5px);
+        }
 
         /* --- BAGIAN KANAN: DASHBOARD --- */
         .right-section {
@@ -176,20 +186,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding-bottom: 0.8rem;
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        .header-left h3 { font-size: 1rem; color: var(--text-white); }
-        .header-left span { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .header-left h3 {
+            font-size: 1rem;
+            color: var(--text-white);
+        }
+
+        .header-left span {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         .header-right {
             text-align: right;
         }
-        .header-right .date { font-size: 0.85rem; font-weight: 600; }
-        .header-right .time { font-size: 0.75rem; color: var(--text-muted); }
+
+        .header-right .date {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .header-right .time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
 
         /* Grid Isi Data */
         .dash-content {
@@ -203,7 +230,7 @@
         /* Card: Info Guru */
         .card-info {
             grid-column: 1 / -1;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             padding: 0.8rem 1rem;
             display: flex;
@@ -211,8 +238,17 @@
             flex-wrap: wrap;
         }
 
-        .info-item span { display: block; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px; }
-        .info-item strong { font-size: 0.9rem; color: var(--text-white); }
+        .info-item span {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .info-item strong {
+            font-size: 0.9rem;
+            color: var(--text-white);
+        }
 
         /* Card: Materi */
         .card-topic {
@@ -223,20 +259,46 @@
             padding: 1rem;
         }
 
-        .topic-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--accent); font-size: 0.8rem; font-weight: 600; }
-        .topic-content h4 { font-size: 1rem; margin-bottom: 4px; }
-        .topic-content p { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .topic-content h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .topic-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
 
         /* Card: Presensi */
         .card-presensi {
             grid-column: 2 / 3;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             padding: 1rem;
         }
 
-        .presensi-title { font-size: 0.8rem; margin-bottom: 0.8rem; display: flex; justify-content: space-between; }
-        .presensi-total { color: var(--success); font-weight: bold; }
+        .presensi-title {
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .presensi-total {
+            color: var(--success);
+            font-weight: bold;
+        }
 
         .presensi-list {
             display: flex;
@@ -249,36 +311,66 @@
             justify-content: space-between;
             font-size: 0.8rem;
             padding: 5px 10px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 6px;
         }
 
-        .p-label { display: flex; align-items: center; gap: 6px; }
-        .dot { width: 7px; height: 7px; border-radius: 50%; }
-        
-        .bg-hadir { background: var(--success); }
-        .bg-sakit { background: var(--warning); }
-        .bg-izin { background: var(--info); }
-        .bg-alpa { background: var(--danger); }
+        .p-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-        .p-names { color: var(--text-muted); font-size: 0.75rem; text-align: right; max-width: 100px; }
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .bg-hadir {
+            background: var(--success);
+        }
+
+        .bg-sakit {
+            background: var(--warning);
+        }
+
+        .bg-izin {
+            background: var(--info);
+        }
+
+        .bg-alpa {
+            background: var(--danger);
+        }
+
+        .p-names {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-align: right;
+            max-width: 100px;
+        }
 
         /* Card: Catatan */
         .card-activity {
             grid-column: 1 / -1;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             padding: 1rem;
             display: flex;
             flex-direction: column;
         }
 
-        .act-title { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
-        .act-desc { 
-            background: rgba(0,0,0,0.3); 
-            padding: 0.8rem 1rem; 
-            border-radius: 8px; 
-            font-size: 0.9rem; 
+        .act-title {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .act-desc {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             color: #e2e8f0;
             border-left: 3px solid var(--accent);
             word-wrap: break-word;
@@ -292,65 +384,160 @@
             z-index: 1;
             opacity: 0.5;
         }
-        .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; left: -100px; animation: orbFloat 10s infinite alternate; }
-        .orb-2 { width: 300px; height: 300px; background: var(--success); bottom: -50px; right: 10%; animation: orbFloat 12s infinite alternate-reverse; }
 
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes floatDashboard { 0% { transform: rotateY(-5deg) rotateX(3deg) translateY(0px); } 50% { transform: rotateY(-5deg) rotateX(3deg) translateY(-10px); } 100% { transform: rotateY(-5deg) rotateX(3deg) translateY(0px); } }
-        @keyframes orbFloat { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+            animation: orbFloat 10s infinite alternate;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--success);
+            bottom: -50px;
+            right: 10%;
+            animation: orbFloat 12s infinite alternate-reverse;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes floatDashboard {
+            0% {
+                transform: rotateY(-5deg) rotateX(3deg) translateY(0px);
+            }
+
+            50% {
+                transform: rotateY(-5deg) rotateX(3deg) translateY(-10px);
+            }
+
+            100% {
+                transform: rotateY(-5deg) rotateX(3deg) translateY(0px);
+            }
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(30px, 50px);
+            }
+        }
 
         /* ======================================== */
         /* RESPONSIVE */
         /* ======================================== */
         @media (max-width: 1024px) {
-            .main-container { 
-                flex-direction: column; 
+            .main-container {
+                flex-direction: column;
                 padding: 10px;
                 gap: 10px;
             }
-            .left-section { 
-                padding: 2rem 1.5rem; 
-                text-align: center; 
-                align-items: center; 
+
+            .left-section {
+                padding: 2rem 1.5rem;
+                text-align: center;
+                align-items: center;
                 min-height: auto;
             }
-            .right-section { 
-                padding: 10px 0; 
-                height: auto; 
-                perspective: none; 
+
+            .right-section {
+                padding: 10px 0;
+                height: auto;
+                perspective: none;
                 width: 100%;
             }
-            .dashboard-preview { 
-                transform: none !important; 
-                width: 100%; 
-                animation: none; 
-                height: auto; 
+
+            .dashboard-preview {
+                transform: none !important;
+                width: 100%;
+                animation: none;
+                height: auto;
                 min-height: auto;
                 padding: 1.5rem;
             }
-            .dash-content { 
-                grid-template-columns: 1fr; 
+
+            .dash-content {
+                grid-template-columns: 1fr;
             }
-            .card-info, .card-topic, .card-presensi, .card-activity { 
-                grid-column: 1 / -1; 
+
+            .card-info,
+            .card-topic,
+            .card-presensi,
+            .card-activity {
+                grid-column: 1 / -1;
             }
-            h1 { font-size: 2rem; }
-            p.description { font-size: 0.95rem; }
-            .btn-main { padding: 14px 30px; font-size: 1rem; }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p.description {
+                font-size: 0.95rem;
+            }
+
+            .btn-main {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .left-section { padding: 1.5rem 1rem; }
-            .dashboard-preview { padding: 1rem; }
-            .card-info { flex-direction: column; gap: 0.5rem; }
-            .dash-header { flex-direction: column; align-items: flex-start; }
-            .header-right { text-align: left; width: 100%; }
-            h1 { font-size: 1.6rem; }
-            .p-row { flex-wrap: wrap; gap: 4px; }
-            .p-names { max-width: 100%; text-align: left; }
+            .left-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .dashboard-preview {
+                padding: 1rem;
+            }
+
+            .card-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .dash-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                text-align: left;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .p-row {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+
+            .p-names {
+                max-width: 100%;
+                text-align: left;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Background Orbs -->
@@ -365,16 +552,16 @@
             <div class="app-badge">
                 <i class="fas fa-chalkboard-teacher"></i> Jurnal Mengajar Guru
             </div>
-            
+
             <h1>Catat Jurnal<br>Mengajarmu.</h1>
-            
+
             <p class="description">
                 Sistem digital untuk pencatatan jurnal mengajar harian,<br>
                 presensi siswa, dan refleksi pembelajaran secara terintegrasi.
             </p>
 
             <div class="btn-wrapper">
-                <a href="{{ route('journals.index') }}" class="btn-main">
+                <a href="{{ route('dashboard') }}" class="btn-main">
                     <span>Buka Jurnal</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -438,19 +625,27 @@
                         </div>
                         <div class="presensi-list">
                             <div class="p-row">
-                                <div class="p-label"><div class="dot bg-hadir"></div> Hadir</div>
+                                <div class="p-label">
+                                    <div class="dot bg-hadir"></div> Hadir
+                                </div>
                                 <div class="p-names" id="hadirCount">28 Siswa</div>
                             </div>
                             <div class="p-row">
-                                <div class="p-label"><div class="dot bg-sakit"></div> Sakit</div>
+                                <div class="p-label">
+                                    <div class="dot bg-sakit"></div> Sakit
+                                </div>
                                 <div class="p-names" id="sakitNames">Aisyah, Rizki</div>
                             </div>
                             <div class="p-row">
-                                <div class="p-label"><div class="dot bg-izin"></div> Izin</div>
+                                <div class="p-label">
+                                    <div class="dot bg-izin"></div> Izin
+                                </div>
                                 <div class="p-names" id="izinNames">Dewi</div>
                             </div>
                             <div class="p-row">
-                                <div class="p-label"><div class="dot bg-alpa"></div> Alpa</div>
+                                <div class="p-label">
+                                    <div class="dot bg-alpa"></div> Alpa
+                                </div>
                                 <div class="p-names" id="alpaNames">Fajar, Gilang</div>
                             </div>
                         </div>
@@ -472,8 +667,7 @@
     <!-- JAVASCRIPT: DATA DUMMY RANDOM -->
     <!-- ========================================== -->
     <script>
-        const dummyData = [
-            {
+        const dummyData = [{
                 teacher: 'Budi Santoso - Guru PAI',
                 class: 'XI IPA 1 / 2',
                 subject: 'Pendidikan Agama Islam',
@@ -569,4 +763,5 @@
     </script>
 
 </body>
+
 </html>
