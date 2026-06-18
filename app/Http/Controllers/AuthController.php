@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Tampilkan form login
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    // Proses login
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -25,38 +23,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            
-            $user = Auth::user();
-            
-            // Redirect berdasarkan role
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-            
-            return redirect()->route('guru.dashboard');
+            return redirect()->route('dashboard'); // Redirect ke dashboard
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->onlyInput('email');
+        return back()->with('error', 'Email atau password salah.');
     }
 
-    // Logout
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login');
-    }
-
-    // Tampilkan form register (opsional)
-    public function showRegister()
-    {
-        return view('auth.register');
-    }
-
-    // Proses register (opsional)
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -64,20 +36,26 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
             'nip' => 'nullable|string',
-            'phone' => 'nullable|string',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => 'guru', // Default role
+            'role' => 'guru',
             'nip' => $validated['nip'] ?? null,
-            'phone' => $validated['phone'] ?? null,
         ]);
 
         Auth::login($user);
         
-        return redirect()->route('guru.dashboard');
+        return redirect()->route('dashboard')->with('success', 'Akun berhasil dibuat!');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('splash');
     }
 }

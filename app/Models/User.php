@@ -32,7 +32,10 @@ class User extends Authenticatable
         ];
     }
 
-    // Cek role
+    // ========================================== //
+    // METHOD CEK ROLE - PASTIKAN ADA!
+    // ========================================== //
+    
     public function isAdmin(): bool
     {
         return $this->role === 'admin';

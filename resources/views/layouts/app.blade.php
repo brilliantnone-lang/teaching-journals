@@ -44,7 +44,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('journals.index') }}">📚 Jurnal Mengajar</a>
+            <a class="navbar-brand" href="{{ route('dashboard') }}">📚 Jurnal Mengajar</a>
             <div class="ms-auto">
                 @auth
                 <span class="text-white me-3">

@@ -561,11 +561,15 @@
             </p>
 
             <div class="btn-wrapper">
-                <a href="{{ route('dashboard') }}" class="btn-main">
-                    <span>Buka Jurnal</span>
+                <a href="{{ route('login') }}" class="btn-main">
+                    <span>Masuk Akun Anda</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 15px;">
+                <i class="fas fa-lock" style="margin-right: 6px;"></i>
+                Silakan login atau daftar terlebih dahulu
+            </p>
         </section>
 
         <!-- ========================================== -->
