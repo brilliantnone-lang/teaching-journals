@@ -318,24 +318,6 @@
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
             </form>
-
-            <!-- Demo Accounts -->
-            <div class="demo-accounts">
-                <div class="demo-title">🔑 Akun Demo</div>
-                <div class="demo-grid">
-                    <div class="demo-item">
-                        <strong>Admin</strong>
-                        admin@admin.com
-                    </div>
-                    <div class="demo-item">
-                        <strong>Guru</strong>
-                        guru@guru.com
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 8px; color: #475569; font-size: 0.7rem;">
-                    Password: <strong style="color: var(--text-muted);">password</strong>
-                </div>
-            </div>
         </div>
 
         <!-- ======================================== -->
