@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jurnal Mengajar Guru</title>
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -43,13 +41,11 @@
             min-height: 100vh;
             width: 100%;
             overflow-y: auto;
-            /* BISA SCROLL */
             display: flex;
             color: var(--text-white);
             padding: 20px 0;
         }
 
-        /* --- CONTAINER UTAMA --- */
         .main-container {
             display: flex;
             width: 100%;
@@ -61,7 +57,6 @@
             align-items: center;
         }
 
-        /* --- BAGIAN KIRI: BRANDING --- */
         .left-section {
             flex: 1;
             padding: 2rem 3rem;
@@ -146,7 +141,6 @@
             transform: translateX(5px);
         }
 
-        /* --- BAGIAN KANAN: DASHBOARD --- */
         .right-section {
             flex: 1.2;
             position: relative;
@@ -181,7 +175,6 @@
             transform: rotateY(-3deg) rotateX(2deg) scale(1.01);
         }
 
-        /* Header Dashboard */
         .dash-header {
             display: flex;
             justify-content: space-between;
@@ -218,7 +211,6 @@
             color: var(--text-muted);
         }
 
-        /* Grid Isi Data */
         .dash-content {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
@@ -227,7 +219,6 @@
             flex: 1;
         }
 
-        /* Card: Info Guru */
         .card-info {
             grid-column: 1 / -1;
             background: rgba(255, 255, 255, 0.03);
@@ -250,7 +241,6 @@
             color: var(--text-white);
         }
 
-        /* Card: Materi */
         .card-topic {
             grid-column: 1 / 2;
             background: rgba(67, 97, 238, 0.1);
@@ -280,7 +270,6 @@
             font-style: italic;
         }
 
-        /* Card: Presensi */
         .card-presensi {
             grid-column: 2 / 3;
             background: rgba(255, 255, 255, 0.03);
@@ -439,9 +428,6 @@
             }
         }
 
-        /* ======================================== */
-        /* RESPONSIVE */
-        /* ======================================== */
         @media (max-width: 1024px) {
             .main-container {
                 flex-direction: column;
@@ -540,14 +526,10 @@
 
 <body>
 
-    <!-- Background Orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
     <div class="main-container">
-        <!-- ========================================== -->
-        <!-- SECTION KIRI: BRANDING -->
-        <!-- ========================================== -->
         <section class="left-section">
             <div class="app-badge">
                 <i class="fas fa-chalkboard-teacher"></i> Jurnal Mengajar Guru
@@ -572,9 +554,6 @@
             </p>
         </section>
 
-        <!-- ========================================== -->
-        <!-- SECTION KANAN: DATA DUMMY -->
-        <!-- ========================================== -->
         <section class="right-section">
             <div class="dashboard-preview">
                 <!-- Header -->
@@ -590,7 +569,6 @@
                 </div>
 
                 <div class="dash-content">
-                    <!-- Info Guru & Kelas -->
                     <div class="card-info">
                         <div class="info-item">
                             <span>KELAS / SEMESTER</span>
@@ -610,7 +588,6 @@
                         </div>
                     </div>
 
-                    <!-- Materi -->
                     <div class="card-topic">
                         <div class="topic-header">
                             <i class="fas fa-book"></i> MATERI & TOPIK
@@ -621,7 +598,6 @@
                         </div>
                     </div>
 
-                    <!-- Presensi -->
                     <div class="card-presensi">
                         <div class="presensi-title">
                             <span>REKAP PRESENSI</span>
@@ -655,7 +631,6 @@
                         </div>
                     </div>
 
-                    <!-- Catatan -->
                     <div class="card-activity">
                         <div class="act-title">CATATAN SAAT MENGAJAR</div>
                         <div class="act-desc" id="teachingNotes">
@@ -667,9 +642,6 @@
         </section>
     </div>
 
-    <!-- ========================================== -->
-    <!-- JAVASCRIPT: DATA DUMMY RANDOM -->
-    <!-- ========================================== -->
     <script>
         const dummyData = [{
                 teacher: 'Budi Santoso - Guru PAI',
@@ -733,11 +705,9 @@
             }
         ];
 
-        // Pilih data random
         const randomIndex = Math.floor(Math.random() * dummyData.length);
         const data = dummyData[randomIndex];
 
-        // Hari dan tanggal Indonesia
         const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         const now = new Date();
         const dayName = days[now.getDay()];
@@ -746,7 +716,6 @@
         const yearStr = now.getFullYear();
         const fullDate = dayName + ', ' + dateStr + '-' + monthStr + '-' + yearStr;
 
-        // Isi data ke elemen HTML
         document.getElementById('teacherName').textContent = data.teacher;
         document.getElementById('className').textContent = data.class;
         document.getElementById('subjectName').textContent = data.subject;
@@ -761,9 +730,6 @@
         document.getElementById('alpaNames').textContent = data.alpa;
         document.getElementById('teachingNotes').textContent = data.notes;
         document.getElementById('currentDay').textContent = fullDate;
-
-        // HANYA REDIRECT SAAT TOMBOL DIKLIK
-        // Tidak ada auto redirect!
     </script>
 
 </body>

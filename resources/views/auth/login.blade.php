@@ -34,12 +34,11 @@
 
         body {
             background-color: var(--dark-bg);
-            /* BACKGROUND PATTERN (Titik-titik halus) */
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
                 radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 30px 30px; /* Ukuran grid titik */
+            background-size: 100% 100%, 100% 100%, 30px 30px;
             min-height: 100vh;
             width: 100%;
             overflow-y: auto;
@@ -51,11 +50,11 @@
             position: relative;
         }
 
-        /* --- BACKGROUND ORBS (Lebih Meriah & Berwarna) --- */
+        /* --- BACKGROUND ORBS --- */
         .orb {
             position: fixed;
             border-radius: 50%;
-            filter: blur(90px); /* Blur lebih lembut */
+            filter: blur(90px);
             z-index: 1;
             opacity: 0.6;
             pointer-events: none;
@@ -64,7 +63,6 @@
         .orb-1 {
             width: 350px;
             height: 350px;
-            /* Gradasi Biru ke Ungu */
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             top: -50px;
             left: -50px;
@@ -74,7 +72,6 @@
         .orb-2 {
             width: 400px;
             height: 400px;
-            /* Gradasi Pink ke Ungu */
             background: linear-gradient(45deg, #f72585, #7209b7);
             bottom: -80px;
             right: -80px;
@@ -84,7 +81,6 @@
         .orb-3 {
             width: 250px;
             height: 250px;
-            /* Gradasi Cyan */
             background: linear-gradient(45deg, #4cc9f0, #4361ee);
             top: 40%;
             left: 50%;
@@ -108,9 +104,8 @@
             100% { transform: translate(-40%, -60%) rotate(360deg); }
         }
 
-        /* --- CONTAINER AUTH (Ukuran Diperkecil Sedikit) --- */
+        /* --- CONTAINER AUTH --- */
         .auth-container {
-            /* DIKECILIN: 900px -> 850px, 600px -> 550px */
             width: 850px;
             max-width: 95%;
             min-height: 550px; 
@@ -136,7 +131,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 30px; /* Padding sedikit disesuaikan agar pas */
+            padding: 30px;
         }
 
         .sign-in-container {
@@ -188,7 +183,6 @@
         }
 
         .overlay {
-            /* Gradient sedikit lebih 'meriah' dengan warna neon */
             background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
             background-repeat: no-repeat;
             background-size: cover;
@@ -202,7 +196,7 @@
             transition: transform 0.6s ease-in-out;
             display: flex;
             align-items: center;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.2); /* Shadow dalam untuk kedalaman */
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.2);
         }
 
         .auth-container.right-panel-active .overlay {
@@ -232,7 +226,7 @@
 
         /* --- TYPOGRAPHY --- */
         h1 {
-            font-size: 2.2rem; /* Font size disesuaikan agar proporsional dengan kotak kecil */
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
@@ -268,7 +262,7 @@
 
         /* --- INPUTS --- */
         .form-group {
-            margin-bottom: 15px; /* Jarak antar input diperkecil sedikit */
+            margin-bottom: 15px;
         }
 
         .form-group .input-group {
@@ -295,10 +289,10 @@
         .form-group .input-group input {
             background: transparent;
             border: none;
-            padding: 10px 15px 10px 0; /* Padding input disesuaikan */
+            padding: 10px 15px 10px 0;
             color: var(--text-white);
             width: 100%;
-            font-size: 0.9rem; /* Font size sedikit lebih kecil agar pas */
+            font-size: 0.9rem;
             outline: none;
         }
 
@@ -311,7 +305,7 @@
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
             width: 100%;
-            padding: 12px; /* Padding tombol disesuaikan */
+            padding: 12px;
             border: none;
             border-radius: 12px;
             font-weight: 600;
@@ -364,6 +358,26 @@
         
         .forgot-link:hover { color: var(--accent); }
 
+        .alert-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .auth-container {
@@ -372,7 +386,7 @@
                 width: 100%;
                 border-radius: 0;
                 border: none;
-                height: 100vh; /* Full height di mobile */
+                height: 100vh;
                 overflow-y: auto;
             }
 
@@ -406,13 +420,12 @@
         }
         
         .mobile-nav-btn { display: none; }
-
     </style>
 </head>
 
 <body>
 
-    <!-- Background Orbs (Lebih Meriah & Berwarna) -->
+    <!-- Background Orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -420,7 +433,7 @@
     <div class="auth-container" id="container">
         
         <!-- ======================================== -->
-        <!-- REGISTER SECTION (Awalnya Tersembunyi) -->
+        <!-- REGISTER SECTION -->
         <!-- ======================================== -->
         <div class="form-container sign-up-container">
             <div class="brand">
@@ -432,29 +445,45 @@
                 Bergabung untuk mulai mencatat jurnal mengajar secara digital.
             </p>
 
-            <form action="#" onsubmit="event.preventDefault()">
+            @if(session('success'))
+                <div class="alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if($errors->any())
+                <div class="alert-error">{{ $errors->first() }}</div>
+            @endif
+
+            <!-- PERBAIKAN: action dan method POST -->
+            <form action="{{ route('register.post') }}" method="POST">
+                @csrf
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-user"></i></span>
-                        <input type="text" placeholder="Nama Lengkap" required>
+                        <input type="text" name="name" placeholder="Nama Lengkap" value="{{ old('name') }}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-envelope"></i></span>
-                        <input type="email" placeholder="Alamat Email" required>
+                        <input type="email" name="email" placeholder="Alamat Email" value="{{ old('email') }}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-id-card"></i></span>
-                        <input type="text" placeholder="NIP (Opsional)">
+                        <input type="text" name="nip" placeholder="NIP (Opsional)" value="{{ old('nip') }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-lock"></i></span>
-                        <input type="password" placeholder="Buat Password" required>
+                        <input type="password" name="password" placeholder="Buat Password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="icon"><i class="fas fa-check-circle"></i></span>
+                        <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
                     </div>
                 </div>
 
@@ -467,7 +496,7 @@
         </div>
 
         <!-- ======================================== -->
-        <!-- LOGIN SECTION (Tampilan Awal) -->
+        <!-- LOGIN SECTION -->
         <!-- ======================================== -->
         <div class="form-container sign-in-container">
             <div class="brand">
@@ -479,21 +508,29 @@
                 Silakan masuk ke akun Anda untuk melanjutkan.
             </p>
 
-            <form action="#" onsubmit="event.preventDefault()">
+            @if(session('error'))
+                <div class="alert-error">{{ session('error') }}</div>
+            @endif
+
+            @if($errors->any())
+                <div class="alert-error">{{ $errors->first() }}</div>
+            @endif
+
+            <!-- PERBAIKAN: action dan method POST -->
+            <form action="{{ route('login.post') }}" method="POST">
+                @csrf
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-envelope"></i></span>
-                        <input type="email" placeholder="Email" value="guru@sekolah.id" required>
+                        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-lock"></i></span>
-                        <input type="password" placeholder="Password" value="********" required>
+                        <input type="password" name="password" placeholder="Password" required>
                     </div>
                 </div>
-
-                <a href="#" class="forgot-link">Lupa password?</a>
 
                 <button class="btn-main" style="margin-top: 10px;">
                     Masuk Akun <i class="fas fa-sign-in-alt"></i>
@@ -504,18 +541,16 @@
         </div>
 
         <!-- ======================================== -->
-        <!-- OVERLAY SECTION (Panel Bergerak) -->
+        <!-- OVERLAY SECTION -->
         <!-- ======================================== -->
         <div class="overlay-container">
             <div class="overlay">
-                <!-- Panel Kiri (Muncul saat mode Register) -->
                 <div class="overlay-panel overlay-left">
                     <h1>Sudah Punya Akun?</h1>
                     <p>Untuk tetap terhubung dengan kami, silakan masuk dengan info pribadi Anda.</p>
                     <button class="btn-ghost" id="signIn">Masuk</button>
                 </div>
                 
-                <!-- Panel Kanan (Muncul saat mode Login) -->
                 <div class="overlay-panel overlay-right">
                     <h1>Halo, Teman Guru!</h1>
                     <p>Masukkan detail pribadi Anda dan mulailah perjalanan mengajar yang terorganisir.</p>
