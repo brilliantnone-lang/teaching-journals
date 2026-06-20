@@ -6,84 +6,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Jurnal Mengajar')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
         body {
-            background: #f5f5f5;
+            background: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
         }
 
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* ======================================== */
+        /* MAIN CONTENT */
+        /* ======================================== */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .navbar {
-            background: #2c3e50 !important;
+        /* ======================================== */
+        /* PAGE CONTENT */
+        /* ======================================== */
+        .page-content {
+            padding: 24px;
+            flex: 1;
         }
 
-        .navbar-brand {
-            color: white !important;
-            font-weight: bold;
+        /* ======================================== */
+        /* RESPONSIVE */
+        /* ======================================== */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+            }
         }
 
-        .btn-pdf {
-            background: #dc3545;
-            color: white;
+        /* ======================================== */
+        /* CARD DARK */
+        /* ======================================== */
+        .card-dark {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: #f8fafc;
         }
 
-        .btn-pdf:hover {
-            background: #c82333;
-            color: white;
+        .card-dark .card-header {
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .card-dark .card-body {
+            color: #e2e8f0;
+        }
+
+        .table-dark-custom {
+            color: #e2e8f0;
+        }
+
+        .table-dark-custom th {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        .table-dark-custom td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #e2e8f0;
+        }
+
+        .table-dark-custom tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
         }
     </style>
+
+    @stack('styles')
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('dashboard') }}">📚 Jurnal Mengajar</a>
-            <div class="ms-auto">
-                @auth
-                <span class="text-white me-3">
-                    <i class="fas fa-user"></i> {{ Auth::user()->name }}
-                    <span class="badge bg-info">{{ Auth::user()->role }}</span>
-                </span>
-                <a href="{{ route('logout') }}" class="btn btn-danger btn-sm"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                    @csrf
-                </form>
-                @else
-                <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Login</a>
-                @endauth
-            </div>
-        </div>
-    </nav>
 
-    <div class="container">
-        @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+    <!-- ========================================== -->
+    <!-- SIDEBAR (Panggil sesuai role) -->
+    <!-- ========================================== -->
+    @auth
+        @if(Auth::user()->role === 'admin')
+            @include('admin.sidebar')
+        @else
+            @include('guru.sidebar')
         @endif
+    @endauth
 
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================================== -->
+    <div class="main-content">
+
+        <!-- ========================================== -->
+        <!-- HEADER (Panggil sesuai role) -->
+        <!-- ========================================== -->
+        @auth
+            @if(Auth::user()->role === 'admin')
+                @include('admin.header')
+            @else
+                @include('guru.header')
+            @endif
+        @endauth
+
+        <!-- ========================================== -->
+        <!-- PAGE CONTENT -->
+        <!-- ========================================== -->
+        <div class="page-content">
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+            @yield('content')
         </div>
-        @endif
 
-        @yield('content')
+        <!-- ========================================== -->
+        <!-- FOOTER (Panggil sesuai role) -->
+        <!-- ========================================== -->
+        @auth
+            @if(Auth::user()->role === 'admin')
+                @include('admin.footer')
+            @else
+                @include('guru.footer')
+            @endif
+        @endauth
+
     </div>
 
+    <!-- Overlay untuk mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sidebar toggle untuk mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            if (toggleBtn && sidebar && overlay) {
+                toggleBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('open');
+                    overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+                });
+
+                overlay.addEventListener('click', function() {
+                    sidebar.classList.remove('open');
+                    overlay.style.display = 'none';
+                });
+            }
+        });
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>
