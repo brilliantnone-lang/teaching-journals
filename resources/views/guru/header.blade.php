@@ -25,17 +25,16 @@
                     </div>
                 </div>
             </div>
-            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                @csrf
-                <button type="submit" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </form>
+            <!-- TOMBOL LOGOUT - BUKA MODAL -->
+            <button type="button" class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
         </div>
     </div>
 </header>
 
 <style>
+    /* CSS sama seperti sebelumnya */
     .header {
         background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);

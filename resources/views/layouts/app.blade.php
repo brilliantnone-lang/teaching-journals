@@ -24,9 +24,6 @@
             display: flex;
         }
 
-        /* ======================================== */
-        /* MAIN CONTENT */
-        /* ======================================== */
         .main-content {
             margin-left: 260px;
             flex: 1;
@@ -35,26 +32,12 @@
             flex-direction: column;
         }
 
-        /* ======================================== */
-        /* PAGE CONTENT */
-        /* ======================================== */
         .page-content {
             padding: 24px;
             flex: 1;
         }
 
-        /* ======================================== */
-        /* RESPONSIVE */
-        /* ======================================== */
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
-        /* ======================================== */
-        /* CARD DARK */
-        /* ======================================== */
+        /* Card Dark */
         .card-dark {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
@@ -95,6 +78,12 @@
         .table-dark-custom tr:hover td {
             background: rgba(255, 255, 255, 0.02);
         }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -103,7 +92,7 @@
 <body>
 
     <!-- ========================================== -->
-    <!-- SIDEBAR (Panggil sesuai role) -->
+    <!-- SIDEBAR -->
     <!-- ========================================== -->
     @auth
         @if(Auth::user()->role === 'admin')
@@ -119,7 +108,7 @@
     <div class="main-content">
 
         <!-- ========================================== -->
-        <!-- HEADER (Panggil sesuai role) -->
+        <!-- HEADER -->
         <!-- ========================================== -->
         @auth
             @if(Auth::user()->role === 'admin')
@@ -152,7 +141,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- FOOTER (Panggil sesuai role) -->
+        <!-- FOOTER -->
         <!-- ========================================== -->
         @auth
             @if(Auth::user()->role === 'admin')
@@ -165,11 +154,45 @@
     </div>
 
     <!-- Overlay untuk mobile -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;"></div>
+
+    <!-- ========================================== -->
+    <!-- MODAL KONFIRMASI LOGOUT -->
+    <!-- ========================================== -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.05);">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <h5 class="modal-title text-white" id="logoutModalLabel">
+                        <i class="fas fa-sign-out-alt text-danger"></i> Konfirmasi Logout
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-white" style="font-size: 1.05rem;">
+                        Apakah Anda yakin ingin <span class="text-danger fw-bold">logout</span>?
+                    </p>
+                    <p class="text-muted" style="font-size: 0.9rem;">
+                        Anda akan keluar dari akun dan perlu login kembali untuk mengakses dashboard.
+                    </p>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #334155; border: none;">
+                        <i class="fas fa-times"></i> Batal
+                    </button>
+                    <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-sign-out-alt"></i> Ya, Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Sidebar toggle untuk mobile
         document.addEventListener('DOMContentLoaded', function() {
             const toggleBtn = document.getElementById('sidebarToggle');
             const sidebar = document.querySelector('.sidebar');
