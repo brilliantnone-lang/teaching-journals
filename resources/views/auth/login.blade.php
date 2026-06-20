@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Register - Jurnal Mengajar</title>
 
-    <!-- Google Fonts: Outfit -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            /* Palette Warna */
             --primary: #4361ee;
             --secondary: #3f37c9;
             --accent: #4cc9f0;
@@ -50,7 +47,6 @@
             position: relative;
         }
 
-        /* --- BACKGROUND ORBS --- */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -104,7 +100,6 @@
             100% { transform: translate(-40%, -60%) rotate(360deg); }
         }
 
-        /* --- CONTAINER AUTH --- */
         .auth-container {
             width: 850px;
             max-width: 95%;
@@ -122,7 +117,6 @@
             display: flex;
         }
 
-        /* --- FORM CONTAINERS --- */
         .form-container {
             position: absolute;
             top: 0;
@@ -147,7 +141,6 @@
             z-index: 1;
         }
 
-        /* LOGIC PERPINDAHAN */
         .auth-container.right-panel-active .sign-in-container {
             transform: translateX(100%);
             opacity: 0;
@@ -166,7 +159,6 @@
             50%, 100% { opacity: 1; z-index: 5; }
         }
 
-        /* --- OVERLAY CONTAINER --- */
         .overlay-container {
             position: absolute;
             top: 0;
@@ -300,7 +292,6 @@
             color: #475569;
         }
 
-        /* --- BUTTONS --- */
         .btn-main {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
@@ -424,17 +415,11 @@
 </head>
 
 <body>
-
-    <!-- Background Orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
     <div class="auth-container" id="container">
-        
-        <!-- ======================================== -->
-        <!-- REGISTER SECTION -->
-        <!-- ======================================== -->
         <div class="form-container sign-up-container">
             <div class="brand">
                 <i class="fas fa-chalkboard-teacher"></i> Jurnal Mengajar
@@ -453,7 +438,6 @@
                 <div class="alert-error">{{ $errors->first() }}</div>
             @endif
 
-            <!-- PERBAIKAN: action dan method POST -->
             <form action="{{ route('register.post') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -495,9 +479,6 @@
             <button class="mobile-nav-btn" id="mobileSignIn">Sudah punya akun? Masuk</button>
         </div>
 
-        <!-- ======================================== -->
-        <!-- LOGIN SECTION -->
-        <!-- ======================================== -->
         <div class="form-container sign-in-container">
             <div class="brand">
                 <i class="fas fa-chalkboard-teacher"></i> Jurnal Mengajar
@@ -516,7 +497,6 @@
                 <div class="alert-error">{{ $errors->first() }}</div>
             @endif
 
-            <!-- PERBAIKAN: action dan method POST -->
             <form action="{{ route('login.post') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -540,9 +520,6 @@
             <button class="mobile-nav-btn" id="mobileSignUp">Belum punya akun? Daftar</button>
         </div>
 
-        <!-- ======================================== -->
-        <!-- OVERLAY SECTION -->
-        <!-- ======================================== -->
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
