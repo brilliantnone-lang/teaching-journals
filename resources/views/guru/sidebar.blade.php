@@ -13,19 +13,21 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('journals.index') }}" class="{{ request()->routeIs('journals.*') ? 'active' : '' }}">
+            <!-- ✅ UBAH: guru.journals.index -->
+            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.*') ? 'active' : '' }}">
                 <i class="fas fa-book"></i> Jurnal Saya
             </a>
         </li>
         <li>
-            <a href="{{ route('journals.create') }}" class="{{ request()->routeIs('journals.create') ? 'active' : '' }}">
+            <!-- ✅ UBAH: guru.journals.create -->
+            <a href="{{ route('guru.journals.create') }}" class="{{ request()->routeIs('guru.journals.create') ? 'active' : '' }}">
                 <i class="fas fa-plus-circle"></i> Buat Jurnal
             </a>
         </li>
 
         <li class="menu-label">Lainnya</li>
         <li>
-            <a href="#">
+            <a href="{{ route('guru.profile.edit') }}" class="{{ request()->routeIs('guru.profile.*') ? 'active' : '' }}">
                 <i class="fas fa-user"></i> Profil Saya
             </a>
         </li>
@@ -115,6 +117,7 @@
         border-radius: 10px;
         transition: all 0.3s;
         font-size: 0.85rem;
+        position: relative;
     }
 
     .sidebar-menu li a:hover {
@@ -152,7 +155,6 @@
             transform: translateX(0);
         }
 
-        /* Overlay saat sidebar terbuka di mobile */
         .sidebar-overlay {
             display: none;
             position: fixed;

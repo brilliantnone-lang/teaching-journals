@@ -33,7 +33,16 @@ class User extends Authenticatable
     }
 
     // ========================================== //
-    // METHOD CEK ROLE - PASTIKAN ADA!
+    // RELASI
+    // ========================================== //
+    
+    public function guruProfile()
+    {
+        return $this->hasOne(GuruProfile::class);
+    }
+
+    // ========================================== //
+    // CEK ROLE
     // ========================================== //
     
     public function isAdmin(): bool
@@ -44,5 +53,26 @@ class User extends Authenticatable
     public function isGuru(): bool
     {
         return $this->role === 'guru';
+    }
+
+    // ========================================== //
+    // CEK APAKAH PROFILE GURU SUDAH LENGKAP
+    // ========================================== //
+    
+    public function hasCompleteProfile(): bool
+    {
+        // Jika admin, tidak perlu profile
+        if ($this->role !== 'guru') {
+            return true;
+        }
+
+        // Cek apakah ada profile dan sudah terisi nama & nip
+        $profile = $this->guruProfile;
+        
+        if (!$profile) {
+            return false;
+        }
+
+        return !empty($profile->nama_guru) && !empty($profile->nip_guru);
     }
 }

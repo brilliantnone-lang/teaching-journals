@@ -13,7 +13,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('journals.index') }}" class="{{ request()->routeIs('journals.*') ? 'active' : '' }}">
+            <!-- ✅ UBAH: admin.journals.index -->
+            <a href="{{ route('admin.journals.index') }}" class="{{ request()->routeIs('admin.journals.*') ? 'active' : '' }}">
                 <i class="fas fa-book"></i> Semua Jurnal
                 <span class="badge">{{ \App\Models\TeachingJournal::count() }}</span>
             </a>

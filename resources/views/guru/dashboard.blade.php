@@ -10,6 +10,22 @@
     </div>
 </div>
 
+<!-- CEK APAKAH PROFIL SUDAH LENGKAP -->
+@if(!Auth::user()->hasCompleteProfile())
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Profil belum lengkap!</strong>
+            Silakan lengkapi profil Anda terlebih dahulu sebelum membuat jurnal.
+            <a href="{{ route('guru.profile.create') }}" class="btn btn-warning btn-sm ms-2">
+                <i class="fas fa-user-plus"></i> Lengkapi Profil
+            </a>
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row mt-4">
     <div class="col-md-4">
         <div class="card text-white bg-primary">
@@ -63,10 +79,11 @@
                                 <td>{{ \Str::limit($jurnal->material, 30) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($jurnal->date)->format('d-m-Y') }}</td>
                                 <td>
-                                    <a href="{{ route('journals.show', $jurnal) }}" class="btn btn-sm btn-info">
+                                    <!-- ✅ PAKAI guru.journals.* -->
+                                    <a href="{{ route('guru.journals.show', $jurnal) }}" class="btn btn-sm btn-info">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('journals.export-pdf', $jurnal) }}" class="btn btn-sm btn-danger">
+                                    <a href="{{ route('guru.journals.export-pdf', $jurnal) }}" class="btn btn-sm btn-danger">
                                         <i class="fas fa-file-pdf"></i>
                                     </a>
                                 </td>
@@ -74,7 +91,8 @@
                             @empty
                             <tr>
                                 <td colspan="5" class="text-center text-muted">
-                                    Belum ada jurnal. <a href="{{ route('journals.create') }}">Buat jurnal sekarang</a>
+                                    Belum ada jurnal. 
+                                    <a href="{{ route('guru.journals.create') }}">Buat jurnal sekarang</a>
                                 </td>
                             </tr>
                             @endforelse
