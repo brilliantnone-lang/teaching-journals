@@ -13,15 +13,12 @@ class CheckGuruProfile
     {
         $user = Auth::user();
 
-        // Jika bukan guru, lanjutkan
         if ($user->role !== 'guru') {
             return $next($request);
         }
 
-        // Cek langsung pakai GuruProfile
         $profile = GuruProfile::where('user_id', $user->id)->first();
-        
-        // Jika belum punya profile atau nama/nip kosong
+
         if (!$profile || empty($profile->nama_guru) || empty($profile->nip_guru)) {
             return redirect()->route('guru.profile.create')
                 ->with('warning', 'Silakan lengkapi profil Anda terlebih dahulu sebelum membuat jurnal.');
