@@ -1,4 +1,3 @@
-<!-- Footer Guru -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-left">
