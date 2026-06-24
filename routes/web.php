@@ -10,10 +10,6 @@ use App\Http\Controllers\AdminJournalController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// ========================================== //
-// GUEST ROUTES (TIDAK PERLU LOGIN)
-// ========================================== //
-
 Route::get('/splash', function () {
     return view('splash-screen');
 })->name('splash');
