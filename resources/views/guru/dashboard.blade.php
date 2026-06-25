@@ -27,33 +27,6 @@
 @endif
 
 <div class="row mt-4">
-    <div class="col-md-4">
-        <div class="card text-white bg-primary">
-            <div class="card-body">
-                <h5><i class="fas fa-book"></i> Total Jurnal</h5>
-                <h2>{{ $totalJurnal }}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-success">
-            <div class="card-body">
-                <h5><i class="fas fa-calendar-day"></i> Jurnal Hari Ini</h5>
-                <h2>{{ \App\Models\TeachingJournal::whereDate('date', now())->count() }}</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-info">
-            <div class="card-body">
-                <h5><i class="fas fa-users"></i> Total Siswa</h5>
-                <h2>{{ \App\Models\TeachingJournal::sum('present') }}</h2>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
     <div class="col-md-12">
         <div class="card card-dark">
             <div class="card-header">

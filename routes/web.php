@@ -7,6 +7,7 @@ use App\Http\Controllers\TeachingJournalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruProfileController;
 use App\Http\Controllers\AdminJournalController; 
+use App\Http\Controllers\SekolahProfileController; 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,16 +57,20 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
 Route::middleware(['auth', 'guru'])->prefix('guru')->name('guru.')->group(function () {
     
-    // Dashboard Guru
+    // Dashboard
     Route::get('/dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
 
-    // Profile Guru (WAJIB DIISI DULU)
+    // Profile Guru
     Route::get('/profile/create', [GuruProfileController::class, 'create'])->name('profile.create');
     Route::post('/profile', [GuruProfileController::class, 'store'])->name('profile.store');
     Route::get('/profile/edit', [GuruProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [GuruProfileController::class, 'update'])->name('profile.update');
 
-    // Jurnal - PAKAI MIDDLEWARE CHECK PROFILE
+    // ✅ DATA SEKOLAH (Setting Sekolah)
+    Route::get('/sekolah', [SekolahProfileController::class, 'index'])->name('sekolah.index');
+    Route::post('/sekolah', [SekolahProfileController::class, 'store'])->name('sekolah.store');
+
+    // Jurnal
     Route::middleware(['check.guru.profile'])->group(function () {
         Route::resource('journals', TeachingJournalController::class);
         Route::get('journals/{journal}/export-pdf', [TeachingJournalController::class, 'exportPdf'])->name('journals.export-pdf');

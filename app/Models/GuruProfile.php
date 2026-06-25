@@ -23,4 +23,15 @@ class GuruProfile extends Model
     {
         return $this->hasMany(TeachingJournal::class);
     }
+
+    // ✅ RELASI KE SEKOLAH PROFILE
+    public function sekolahProfile()
+    {
+        return $this->hasOne(SekolahProfile::class);
+    }
+
+    public static function getByUserId($userId)
+    {
+        return self::where('user_id', $userId)->first();
+    }
 }

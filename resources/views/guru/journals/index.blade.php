@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>📋 Daftar Jurnal Mengajar</h1>
-    <a href="{{ route('journals.create') }}" class="btn btn-primary">
+    <a href="{{ route('guru.journals.create') }}" class="btn btn-primary">
         ➕ Tambah Jurnal
     </a>
 </div>
@@ -39,11 +39,10 @@
                 <td>{{ $journal->present }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        <a href="{{ route('guru.journals.create') }}">Tambah Jurnal</a>
-                        <a href="{{ route('guru.journals.show', $journal) }}">Lihat</a>
-                        <a href="{{ route('guru.journals.edit', $journal) }}">Edit</a>
-                        <a href="{{ route('guru.journals.export-pdf', $journal) }}">PDF</a>
-                        <form action="{{ route('journals.destroy', $journal) }}" method="POST" class="d-inline">
+                        <a href="{{ route('guru.journals.show', $journal) }}" class="btn btn-info">👁️</a>
+                        <a href="{{ route('guru.journals.edit', $journal) }}" class="btn btn-warning">✏️</a>
+                        <a href="{{ route('guru.journals.export-pdf', $journal) }}" class="btn btn-danger">📄</a>
+                        <form action="{{ route('guru.journals.destroy', $journal) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Hapus data ini?')">🗑️</button>

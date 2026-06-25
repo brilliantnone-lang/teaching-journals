@@ -13,27 +13,25 @@
             </a>
         </li>
         <li>
-            <!-- ✅ UBAH: guru.journals.index -->
-            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.*') ? 'active' : '' }}">
+            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.index') || request()->routeIs('guru.journals.show') || request()->routeIs('guru.journals.edit') ? 'active' : '' }}">
                 <i class="fas fa-book"></i> Jurnal Saya
             </a>
         </li>
         <li>
-            <!-- ✅ UBAH: guru.journals.create -->
             <a href="{{ route('guru.journals.create') }}" class="{{ request()->routeIs('guru.journals.create') ? 'active' : '' }}">
                 <i class="fas fa-plus-circle"></i> Buat Jurnal
             </a>
         </li>
 
-        <li class="menu-label">Lainnya</li>
+        <li class="menu-label">Pengaturan</li>
         <li>
-            <a href="{{ route('guru.profile.edit') }}" class="{{ request()->routeIs('guru.profile.*') ? 'active' : '' }}">
-                <i class="fas fa-user"></i> Profil Saya
+            <a href="{{ route('guru.sekolah.index') }}" class="{{ request()->routeIs('guru.sekolah.*') ? 'active' : '' }}">
+                <i class="fas fa-school"></i> Setting Sekolah
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class="fas fa-calendar-alt"></i> Kalender
+            <a href="{{ route('guru.profile.edit') }}" class="{{ request()->routeIs('guru.profile.*') ? 'active' : '' }}">
+                <i class="fas fa-user"></i> Profil Saya
             </a>
         </li>
     </ul>
@@ -166,7 +164,7 @@
             z-index: 998;
         }
 
-        .sidebar.open ~ .sidebar-overlay {
+        .sidebar.open~.sidebar-overlay {
             display: block;
         }
     }

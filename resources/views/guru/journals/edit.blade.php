@@ -5,22 +5,20 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>✏️ Edit Jurnal Mengajar</h1>
-        <a href="{{ route('journals.index') }}" class="btn btn-secondary">← Kembali</a>
+        <a href="{{ route('guru.journals.index') }}" class="btn btn-secondary">← Kembali</a>
     </div>
 
-    <form action="{{ route('journals.update', $journal) }}" method="POST" enctype="multipart/form-data">
+    <!-- ✅ UBAH: guru.journals.update -->
+    <form action="{{ route('guru.journals.update', $journal) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-
-        <!-- Copy from create.blade.php but with old values filled -->
-        <!-- Use $journal->field_name instead of old('field_name') -->
 
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
                     <label class="form-label fw-bold">Nama Guru <span class="text-danger">*</span></label>
                     <input type="text" name="teacher_name" class="form-control @error('teacher_name') is-invalid @enderror" 
-                           value="{{ old('teacher_name', $journal->teacher_name) }}" required>
+                           value="{{ old('teacher_name', $journal->teacher_name) }}" readonly>
                     @error('teacher_name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -29,7 +27,7 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">NIP <span class="text-danger">*</span></label>
                     <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" 
-                           value="{{ old('nip', $journal->nip) }}" required>
+                           value="{{ old('nip', $journal->nip) }}" readonly>
                     @error('nip')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -95,9 +93,6 @@
         </div>
 
         <hr>
-
-        <!-- Continue with other fields from create form -->
-        <!-- Use old('field', $journal->field) for each field -->
 
         <div class="row">
             <div class="col-md-4">
@@ -274,7 +269,8 @@
         </div>
 
         <div class="d-flex justify-content-between mt-3">
-            <a href="{{ route('journals.index') }}" class="btn btn-secondary">Batal</a>
+            <!-- ✅ UBAH: guru.journals.index -->
+            <a href="{{ route('guru.journals.index') }}" class="btn btn-secondary">Batal</a>
             <button type="submit" class="btn btn-primary">💾 Update Jurnal</button>
         </div>
     </form>

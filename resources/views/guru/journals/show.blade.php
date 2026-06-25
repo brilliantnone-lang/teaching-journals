@@ -6,8 +6,9 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>📄 Detail Jurnal Mengajar</h1>
         <div>
-            <a href="{{ route('journals.index') }}" class="btn btn-secondary">← Kembali</a>
-            <a href="{{ route('journals.export-pdf', $journal) }}" class="btn btn-danger">📄 Export PDF</a>
+            <a href="{{ route('guru.journals.index') }}" class="btn btn-secondary">← Kembali</a>
+            <a href="{{ route('guru.journals.edit', $journal) }}" class="btn btn-warning">✏️ Edit</a>
+            <a href="{{ route('guru.journals.export-pdf', $journal) }}" class="btn btn-danger">📄 Export PDF</a>
         </div>
     </div>
 
