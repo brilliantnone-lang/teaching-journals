@@ -59,6 +59,8 @@ Route::middleware(['auth', 'guru'])->prefix('guru')->name('guru.')->group(functi
     
     // Dashboard
     Route::get('/dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/export-monthly-with-note', [GuruDashboardController::class, 'exportMonthlyWithNote'])->name('dashboard.export-monthly-with-note');
+    Route::get('/dashboard/export-monthly-without-note', [GuruDashboardController::class, 'exportMonthlyWithoutNote'])->name('dashboard.export-monthly-without-note');
 
     // Profile Guru
     Route::get('/profile/create', [GuruProfileController::class, 'create'])->name('profile.create');
