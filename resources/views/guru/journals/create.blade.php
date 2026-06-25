@@ -5,10 +5,12 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>📝 Form Jurnal Mengajar Harian</h1>
-        <a href="{{ route('journals.index') }}" class="btn btn-secondary">← Kembali</a>
+        <!-- ✅ UBAH: guru.journals.index -->
+        <a href="{{ route('guru.journals.index') }}" class="btn btn-secondary">← Kembali</a>
     </div>
 
-    <form action="{{ route('journals.store') }}" method="POST" enctype="multipart/form-data">
+    <!-- ✅ UBAH: guru.journals.store -->
+    <form action="{{ route('guru.journals.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -16,7 +18,7 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">Nama Guru <span class="text-danger">*</span></label>
                     <input type="text" name="teacher_name" class="form-control @error('teacher_name') is-invalid @enderror" 
-                           value="{{ old('teacher_name') }}" required>
+                           value="{{ old('teacher_name', $profile->nama_guru ?? '') }}" readonly>
                     @error('teacher_name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -25,7 +27,7 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold">NIP <span class="text-danger">*</span></label>
                     <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" 
-                           value="{{ old('nip') }}" required>
+                           value="{{ old('nip', $profile->nip_guru ?? '') }}" readonly>
                     @error('nip')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -253,7 +255,7 @@
         </div>
 
         <div class="d-flex justify-content-between mt-3">
-            <a href="{{ route('journals.index') }}" class="btn btn-secondary">Batal</a>
+            <a href="{{ route('guru.journals.index') }}" class="btn btn-secondary">Batal</a>
             <button type="submit" class="btn btn-primary">💾 Simpan Jurnal</button>
         </div>
     </form>

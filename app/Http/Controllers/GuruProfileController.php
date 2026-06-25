@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class GuruProfileController extends Controller
 {
-    // Form buat profile (jika belum ada)
     public function create()
     {
         $user = Auth::user();
         
-        // Jika sudah punya profile, redirect ke edit
-        $profile = GuruProfile::getByUserId($user->id);
+        // ✅ LANGSUNG PAKAI where()->first()
+        $profile = GuruProfile::where('user_id', $user->id)->first();
+        
         if ($profile) {
             return redirect()->route('guru.profile.edit');
         }
@@ -22,7 +22,6 @@ class GuruProfileController extends Controller
         return view('guru.profile.create');
     }
 
-    // Simpan profile pertama kali
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -44,10 +43,9 @@ class GuruProfileController extends Controller
             ->with('success', 'Profil berhasil dibuat! Sekarang Anda bisa membuat jurnal.');
     }
 
-    // Form edit profile
     public function edit()
     {
-        $profile = GuruProfile::getByUserId(Auth::id());
+        $profile = GuruProfile::where('user_id', Auth::id())->first();
         
         if (!$profile) {
             return redirect()->route('guru.profile.create')
@@ -57,10 +55,14 @@ class GuruProfileController extends Controller
         return view('guru.profile.edit', compact('profile'));
     }
 
-    // Update profile
     public function update(Request $request)
     {
-        $profile = GuruProfile::getByUserId(Auth::id());
+        $profile = GuruProfile::where('user_id', Auth::id())->first();
+
+        if (!$profile) {
+            return redirect()->route('guru.profile.create')
+                ->with('warning', 'Silakan buat profil terlebih dahulu.');
+        }
 
         $validated = $request->validate([
             'nama_guru' => 'required|string|max:255',
