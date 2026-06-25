@@ -46,17 +46,6 @@
             vertical-align: middle;
         }
 
-        .logo-cell {
-            width: 100px;
-            text-align: center;
-        }
-
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-        }
-
         .header-text {
             text-align: center;
             line-height: 1.3;
@@ -236,6 +225,37 @@
             text-decoration: underline;
             /* Garis bawah */
         }
+
+        /* ======================================== */
+        /* LOGO KIRI - LONJONG/OVAL */
+        /* ======================================== */
+        .logo-cell-left {
+            width: 100px;
+            text-align: center;
+        }
+
+        .logo-kiri {
+            width: 80px;
+            /* Lebar lebih besar */
+            height: 100px;
+            /* Tinggi lebih kecil → jadi lonjong */
+            object-fit: contain;
+        }
+
+        /* ======================================== */
+        /* LOGO KANAN - TETAP PERSEGI (opsional) */
+        /* ======================================== */
+        .logo-cell-right {
+            width: 100px;
+            text-align: center;
+        }
+
+        .logo-kanan {
+            width: 100px;
+            height: 100px;
+            /* Tetap persegi */
+            object-fit: contain;
+        }
     </style>
 </head>
 
@@ -305,9 +325,9 @@
     <!-- KOP SURAT -->
     <table class="kop-table">
         <tr>
-            <td class="logo-cell">
+            <td class="logo-cell-left">
                 @if($logoKiriBase64)
-                <img src="{{ $logoKiriBase64 }}" class="logo-img" alt="Logo Kiri">
+                <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
                 @endif
             </td>
 
@@ -319,9 +339,9 @@
                 <div class="website-link">{{ $websiteSekolah }}</div>
             </td>
 
-            <td class="logo-cell">
+            <td class="logo-cell-right">
                 @if($logoKananBase64)
-                <img src="{{ $logoKananBase64 }}" class="logo-img" alt="Logo Kanan">
+                <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
                 @endif
             </td>
         </tr>
@@ -517,9 +537,9 @@
     <!-- KOP SURAT -->
     <table class="kop-table">
         <tr>
-            <td class="logo-cell">
+            <td class="logo-cell-left">
                 @if($logoKiriBase64)
-                <img src="{{ $logoKiriBase64 }}" class="logo-img" alt="Logo Kiri">
+                <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
                 @endif
             </td>
 
@@ -531,9 +551,9 @@
                 <div class="website-link">{{ $websiteSekolah }}</div>
             </td>
 
-            <td class="logo-cell">
+            <td class="logo-cell-right">
                 @if($logoKananBase64)
-                <img src="{{ $logoKananBase64 }}" class="logo-img" alt="Logo Kanan">
+                <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
                 @endif
             </td>
         </tr>
