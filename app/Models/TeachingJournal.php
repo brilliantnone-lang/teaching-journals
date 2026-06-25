@@ -28,6 +28,7 @@ class TeachingJournal extends Model
         'sick_names',
         'absent_names',
         'notes',
+        'catatan_kepsek',
         'photo1',
         'photo2',
         'guru_profile_id',  // TAMBAHKAN INI

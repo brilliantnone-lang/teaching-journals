@@ -60,6 +60,7 @@ class TeachingJournalController extends Controller
             'sick_names' => 'nullable|string',
             'absent_names' => 'nullable|string',
             'notes' => 'nullable|string',
+            'catatan_kepsek' => 'nullable|string', 
             'photo1' => 'nullable|image|max:2048',
             'photo2' => 'nullable|image|max:2048',
         ]);
@@ -165,6 +166,7 @@ class TeachingJournalController extends Controller
             'sick_names' => 'nullable|string',
             'absent_names' => 'nullable|string',
             'notes' => 'nullable|string',
+            'catatan_kepsek' => 'nullable|string',
             'photo1' => 'nullable|image|max:2048',
             'photo2' => 'nullable|image|max:2048',
         ]);
@@ -208,5 +210,28 @@ class TeachingJournalController extends Controller
 
         return redirect()->route('guru.journals.index')
             ->with('success', 'Jurnal berhasil dihapus!');
+    }
+    // ========================================== //
+    // UPDATE CATATAN KEPALA SEKOLAH
+    // ========================================== //
+    public function updateCatatan(Request $request, TeachingJournal $journal)
+    {
+        // Cek akses: hanya admin atau guru yang bersangkutan
+        $profile = GuruProfile::where('user_id', Auth::id())->first();
+
+        if (!$profile || $journal->guru_profile_id !== $profile->id) {
+            abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
+        }
+
+        $validated = $request->validate([
+            'catatan_kepsek' => 'nullable|string',
+        ]);
+
+        $journal->update([
+            'catatan_kepsek' => $validated['catatan_kepsek'] ?? null,
+        ]);
+
+        return redirect()->route('guru.journals.show', $journal)
+            ->with('success', 'Catatan Kepala Sekolah berhasil diperbarui!');
     }
 }

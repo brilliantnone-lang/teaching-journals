@@ -19,62 +19,42 @@ Route::get('/', function () {
     return redirect()->route('splash');
 });
 
-// ========================================== //
-// AUTH ROUTES (LOGIN & REGISTER)
-// ========================================== //
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ========================================== //
-// PROTECTED ROUTES (HARUS LOGIN)
-// ========================================== //
-
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    // ❌ HAPUS route journals di sini (pindah ke guru)
-});
 
-// ========================================== //
-// ADMIN ROUTES (HANYA ADMIN)
-// ========================================== //
+});
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    
-    // Admin lihat semua jurnal - PAKAI CONTROLLER KHUSUS
+
     Route::get('/journals', [AdminJournalController::class, 'index'])->name('journals.index');
     Route::get('/journals/{journal}', [AdminJournalController::class, 'show'])->name('journals.show');
 });
 
-// ========================================== //
-// GURU ROUTES (HANYA GURU)
-// ========================================== //
-
 Route::middleware(['auth', 'guru'])->prefix('guru')->name('guru.')->group(function () {
     
-    // Dashboard
     Route::get('/dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/export-monthly-with-note', [GuruDashboardController::class, 'exportMonthlyWithNote'])->name('dashboard.export-monthly-with-note');
     Route::get('/dashboard/export-monthly-without-note', [GuruDashboardController::class, 'exportMonthlyWithoutNote'])->name('dashboard.export-monthly-without-note');
 
-    // Profile Guru
     Route::get('/profile/create', [GuruProfileController::class, 'create'])->name('profile.create');
     Route::post('/profile', [GuruProfileController::class, 'store'])->name('profile.store');
     Route::get('/profile/edit', [GuruProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [GuruProfileController::class, 'update'])->name('profile.update');
 
-    // ✅ DATA SEKOLAH (Setting Sekolah)
     Route::get('/sekolah', [SekolahProfileController::class, 'index'])->name('sekolah.index');
     Route::post('/sekolah', [SekolahProfileController::class, 'store'])->name('sekolah.store');
 
-    // Jurnal
     Route::middleware(['check.guru.profile'])->group(function () {
         Route::resource('journals', TeachingJournalController::class);
         Route::get('journals/{journal}/export-pdf', [TeachingJournalController::class, 'exportPdf'])->name('journals.export-pdf');
+        Route::put('journals/{journal}/update-catatan', [TeachingJournalController::class, 'updateCatatan'])->name('journals.update-catatan'); 
     });
 });

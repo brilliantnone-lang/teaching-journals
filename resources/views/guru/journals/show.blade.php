@@ -27,9 +27,7 @@
     <div class="card" style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; overflow: hidden;">
         <div class="card-body" style="padding: 28px;">
 
-            <!-- ========================================== -->
-            <!-- INFO UMUM -->
-            <!-- ========================================== -->
+            <!-- INFO GURU & AKADEMIK -->
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-6">
                     <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px;">
@@ -53,9 +51,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
             <!-- MATERI & JADWAL -->
-            <!-- ========================================== -->
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
                 <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px; text-align: center;">
                     <div style="color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Hari & Tanggal</div>
@@ -71,9 +67,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- MATERI & KEGIATAN -->
-            <!-- ========================================== -->
+            <!-- MATERI -->
             <div style="background: rgba(67, 97, 238, 0.08); border: 1px solid rgba(67, 97, 238, 0.15); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                     <i class="fas fa-book" style="color: #4cc9f0;"></i>
@@ -82,6 +76,7 @@
                 <p style="color: #f8fafc; font-size: 1.05rem; margin-bottom: 0;">{{ $journal->material }}</p>
             </div>
 
+            <!-- KEGIATAN -->
             <div style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.12); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                     <i class="fas fa-chalkboard-teacher" style="color: #34d399;"></i>
@@ -90,9 +85,7 @@
                 <p style="color: #e2e8f0; margin-bottom: 0;">{{ $journal->learning_activity }}</p>
             </div>
 
-            <!-- ========================================== -->
-            <!-- PRESENSI SISWA -->
-            <!-- ========================================== -->
+            <!-- PRESENSI -->
             <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
                     <i class="fas fa-users" style="color: #60a5fa;"></i>
@@ -140,9 +133,7 @@
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- CATATAN -->
-            <!-- ========================================== -->
+            <!-- CATATAN SAAT MENGAJAR -->
             <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                     <i class="fas fa-pencil-alt" style="color: #94a3b8;"></i>
@@ -152,10 +143,35 @@
             </div>
 
             <!-- ========================================== -->
-            <!-- FOTO -->
+            <!-- CATATAN KEPALA SEKOLAH - HANYA DITAMPILKAN -->
             <!-- ========================================== -->
+            <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px; margin-top: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <i class="fas fa-pencil-alt" style="color: #fbbf24;"></i>
+                    <span style="font-weight: 600; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Catatan Kepala Sekolah
+                    </span>
+                    @if($journal->catatan_kepsek)
+                        <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Sudah diisi</span>
+                    @else
+                        <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">Belum diisi</span>
+                    @endif
+                </div>
+                
+                @if($journal->catatan_kepsek)
+                    <p style="color: #e2e8f0; margin-bottom: 0; font-style: italic; background: rgba(0,0,0,0.2); padding: 12px 16px; border-radius: 8px; border-left: 3px solid #fbbf24;">
+                        {{ $journal->catatan_kepsek }}
+                    </p>
+                @else
+                    <p style="color: #64748b; margin-bottom: 0; font-style: italic;">
+                        Belum ada catatan dari Kepala Sekolah.
+                    </p>
+                @endif
+            </div>
+
+            <!-- FOTO -->
             @if($journal->photo1 || $journal->photo2)
-            <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px;">
+            <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px; margin-top: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
                     <i class="fas fa-camera" style="color: #4cc9f0;"></i>
                     <span style="font-weight: 600; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Foto Kegiatan</span>
