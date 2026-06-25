@@ -14,6 +14,7 @@ class SekolahProfile extends Model
         'dinas',
         'nama_sekolah',
         'alamat_sekolah',
+        'kota',
         'website_sekolah',
         'kepala_sekolah',
         'nip_kepala_sekolah',
