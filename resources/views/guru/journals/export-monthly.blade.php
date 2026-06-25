@@ -24,8 +24,13 @@
             padding: 0;
         }
 
+        /* ======================================== */
+        /* PAGE BREAK - PAKAI INI */
+        /* ======================================== */
         .page-break {
             page-break-before: always;
+            page-break-after: avoid;
+            page-break-inside: avoid;
         }
 
         /* ======================================== */
@@ -108,6 +113,7 @@
             border-collapse: collapse;
             margin: 12px 0;
             font-size: 10pt;
+            page-break-inside: avoid;
         }
 
         th,
@@ -249,6 +255,21 @@
             height: 100px;
             object-fit: contain;
         }
+
+        /* ======================================== */
+        /* KONTEN PER HALAMAN */
+        /* ======================================== */
+        .page-content {
+            page-break-inside: avoid;
+            page-break-after: avoid;
+        }
+
+        /* ======================================== */
+        /* HILANGKAN NUMBERING DARI DOM PDF */
+        /* ======================================== */
+        .page-number {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -258,81 +279,84 @@
     <!-- BASE64 LOGO & DATA SEKOLAH -->
     <!-- ========================================== -->
     @php
-        $sekolah = \App\Models\SekolahProfile::where('guru_profile_id', $profile->id)->first();
+    $sekolah = \App\Models\SekolahProfile::where('guru_profile_id', $profile->id)->first();
 
-        $instansi = $sekolah->instansi ?? 'PEMERINTAH PROVINSI KALIMANTAN SELATAN';
-        $dinas = $sekolah->dinas ?? 'DINAS PENDIDIKAN DAN KEBUDAYAAN';
-        $namaSekolah = $sekolah->nama_sekolah ?? 'SMK NEGERI 1 BANJARMASIN';
-        $alamatSekolah = $sekolah->alamat_sekolah ?? 'Jalan Mulawarman No. 45 Telp & Faxs. 0511-4368225 Banjarmasin 70117';
-        $kota = $sekolah->kota ?? 'Banjarmasin';
-        $websiteSekolah = $sekolah->website_sekolah ?? 'http://smkn1bjm.sch.id';
-        $kepalaSekolah = $sekolah->kepala_sekolah ?? 'Agustin Purnomosari, S.Pd., M.Pd';
-        $nipKepsek = $sekolah->nip_kepala_sekolah ?? '197208211998032007';
-        $tahunPelajaran = $sekolah->tahun_pelajaran ?? '2025/2026';
+    $instansi = $sekolah->instansi ?? 'PEMERINTAH PROVINSI KALIMANTAN SELATAN';
+    $dinas = $sekolah->dinas ?? 'DINAS PENDIDIKAN DAN KEBUDAYAAN';
+    $namaSekolah = $sekolah->nama_sekolah ?? 'SMK NEGERI 1 BANJARMASIN';
+    $alamatSekolah = $sekolah->alamat_sekolah ?? 'Jalan Mulawarman No. 45 Telp & Faxs. 0511-4368225 Banjarmasin 70117';
+    $kota = $sekolah->kota ?? 'Banjarmasin';
+    $websiteSekolah = $sekolah->website_sekolah ?? 'http://smkn1bjm.sch.id';
+    $kepalaSekolah = $sekolah->kepala_sekolah ?? 'Agustin Purnomosari, S.Pd., M.Pd';
+    $nipKepsek = $sekolah->nip_kepala_sekolah ?? '197208211998032007';
+    $tahunPelajaran = $sekolah->tahun_pelajaran ?? '2025/2026';
 
-        // ========================================== //
-        // LOGO
-        // ========================================== //
-        $logoKiriBase64 = '';
-        if ($sekolah && $sekolah->logo_kiri && file_exists(storage_path('app/public/'.$sekolah->logo_kiri))) {
-            $logoKiriPath = storage_path('app/public/'.$sekolah->logo_kiri);
-            $logoKiriBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($logoKiriPath));
-        }
+    // ========================================== //
+    // LOGO
+    // ========================================== //
+    $logoKiriBase64 = '';
+    if ($sekolah && $sekolah->logo_kiri && file_exists(storage_path('app/public/'.$sekolah->logo_kiri))) {
+    $logoKiriPath = storage_path('app/public/'.$sekolah->logo_kiri);
+    $logoKiriBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($logoKiriPath));
+    }
 
-        $logoKananBase64 = '';
-        if ($sekolah && $sekolah->logo_kanan && file_exists(storage_path('app/public/'.$sekolah->logo_kanan))) {
-            $logoKananPath = storage_path('app/public/'.$sekolah->logo_kanan);
-            $logoKananBase64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoKananPath));
-        }
+    $logoKananBase64 = '';
+    if ($sekolah && $sekolah->logo_kanan && file_exists(storage_path('app/public/'.$sekolah->logo_kanan))) {
+    $logoKananPath = storage_path('app/public/'.$sekolah->logo_kanan);
+    $logoKananBase64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoKananPath));
+    }
 
-        $totalJournals = $journals->count();
-        $currentIndex = 0;
+    $totalJournals = $journals->count();
+    $currentIndex = 0;
     @endphp
 
     <!-- ========================================== -->
     <!-- LOOPING SETIAP JURNAL -->
     <!-- ========================================== -->
     @foreach($journals as $journal)
-        @php
-            $currentIndex++;
-            // ========================================== //
-            // FOTO JURNAL
-            // ========================================== //
-            $foto1Base64 = '';
-            if ($journal->photo1 && file_exists(storage_path('app/public/'.$journal->photo1))) {
-                $foto1Path = storage_path('app/public/'.$journal->photo1);
-                $foto1Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto1Path));
-            }
+    @php
+    $currentIndex++;
+    // ========================================== //
+    // FOTO JURNAL
+    // ========================================== //
+    $foto1Base64 = '';
+    if ($journal->photo1 && file_exists(storage_path('app/public/'.$journal->photo1))) {
+    $foto1Path = storage_path('app/public/'.$journal->photo1);
+    $foto1Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto1Path));
+    }
 
-            $foto2Base64 = '';
-            if ($journal->photo2 && file_exists(storage_path('app/public/'.$journal->photo2))) {
-                $foto2Path = storage_path('app/public/'.$journal->photo2);
-                $foto2Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto2Path));
-            }
+    $foto2Base64 = '';
+    if ($journal->photo2 && file_exists(storage_path('app/public/'.$journal->photo2))) {
+    $foto2Path = storage_path('app/public/'.$journal->photo2);
+    $foto2Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto2Path));
+    }
 
-            // ========================================== //
-            // FORMAT NAMA SISWA VERTIKAL
-            // ========================================== //
-            $permitNames = $journal->permit_names ? explode(',', $journal->permit_names) : [];
-            $sickNames = $journal->sick_names ? explode(',', $journal->sick_names) : [];
-            $absentNames = $journal->absent_names ? explode(',', $journal->absent_names) : [];
-        @endphp
+    // ========================================== //
+    // FORMAT NAMA SISWA VERTIKAL
+    // ========================================== //
+    $permitNames = $journal->permit_names ? explode(',', $journal->permit_names) : [];
+    $sickNames = $journal->sick_names ? explode(',', $journal->sick_names) : [];
+    $absentNames = $journal->absent_names ? explode(',', $journal->absent_names) : [];
+    @endphp
 
-        <!-- ========================================== -->
-        <!-- PAGE BREAK (KECUALI HALAMAN PERTAMA) -->
-        <!-- ========================================== -->
-        @if($currentIndex > 1)
-            <div class="page-break"></div>
-        @endif
+    <!-- ========================================== -->
+    <!-- PAGE BREAK - KECUALI HALAMAN PERTAMA -->
+    <!-- ========================================== -->
+    @if($currentIndex > 1)
+    <div class="page-break"></div>
+    @endif
 
-        <!-- ========================================== -->
+    <!-- ========================================== -->
+    <!-- KONTEN PER HALAMAN -->
+    <!-- ========================================== -->
+    <div class="page-content">
+
         <!-- KOP SURAT -->
-        <!-- ========================================== -->
         <table class="kop-table">
             <tr>
                 <td class="logo-cell-left">
                     @if($logoKiriBase64)
-                        <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
+                    <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
                     @endif
                 </td>
 
@@ -346,7 +370,7 @@
 
                 <td class="logo-cell-right">
                     @if($logoKananBase64)
-                        <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
+                    <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
                     @endif
                 </td>
             </tr>
@@ -430,13 +454,13 @@
                 <td>{{ $journal->permit }}</td>
                 <td>
                     @if(count($permitNames) > 0)
-                        <ul class="nama-siswa-list">
-                            @foreach($permitNames as $name)
-                                <li>{{ trim($name) }}</li>
-                            @endforeach
-                        </ul>
+                    <ul class="nama-siswa-list">
+                        @foreach($permitNames as $name)
+                        <li>{{ trim($name) }}</li>
+                        @endforeach
+                    </ul>
                     @else
-                        -
+                    -
                     @endif
                 </td>
             </tr>
@@ -445,13 +469,13 @@
                 <td>{{ $journal->sick }}</td>
                 <td>
                     @if(count($sickNames) > 0)
-                        <ul class="nama-siswa-list">
-                            @foreach($sickNames as $name)
-                                <li>{{ trim($name) }}</li>
-                            @endforeach
-                        </ul>
+                    <ul class="nama-siswa-list">
+                        @foreach($sickNames as $name)
+                        <li>{{ trim($name) }}</li>
+                        @endforeach
+                    </ul>
                     @else
-                        -
+                    -
                     @endif
                 </td>
             </tr>
@@ -460,13 +484,13 @@
                 <td>{{ $journal->absent }}</td>
                 <td>
                     @if(count($absentNames) > 0)
-                        <ul class="nama-siswa-list">
-                            @foreach($absentNames as $name)
-                                <li>{{ trim($name) }}</li>
-                            @endforeach
-                        </ul>
+                    <ul class="nama-siswa-list">
+                        @foreach($absentNames as $name)
+                        <li>{{ trim($name) }}</li>
+                        @endforeach
+                    </ul>
                     @else
-                        -
+                    -
                     @endif
                 </td>
             </tr>
@@ -490,16 +514,16 @@
             <tr>
                 <td class="foto-cell" style="width: 50%;">
                     @if($foto1Base64)
-                        <img src="{{ $foto1Base64 }}" alt="Foto 1">
+                    <img src="{{ $foto1Base64 }}" alt="Foto 1">
                     @else
-                        <span class="no-photo">[Foto 1]</span>
+                    <span class="no-photo">[Foto 1]</span>
                     @endif
                 </td>
                 <td class="foto-cell" style="width: 50%;">
                     @if($foto2Base64)
-                        <img src="{{ $foto2Base64 }}" alt="Foto 2">
+                    <img src="{{ $foto2Base64 }}" alt="Foto 2">
                     @else
-                        <span class="no-photo">[Foto 2]</span>
+                    <span class="no-photo">[Foto 2]</span>
                     @endif
                 </td>
             </tr>
@@ -527,19 +551,24 @@
         </table>
 
         <!-- ========================================== -->
-        <!-- CATATAN KEPALA SEKOLAH (HANYA JIKA withNote = true) -->
+        <!-- CATATAN KEPALA SEKOLAH -->
         <!-- ========================================== -->
         @if($withNote)
-            <div class="catatan-ks">
-                <div class="label-ks">Catatan Kepala Sekolah :</div>
-                <div class="garis-ks">
-                    ................................................................................................................................................................<br>
-                    ................................................................................................................................................................<br>
-                    ................................................................................................................................................................<br>
-                    ................................................................................................................................................................
-                </div>
+        <div class="page-break"></div>
+        
+        <div class="catatan-ks">
+            <div class="label-ks">Catatan Kepala Sekolah :</div>
+            <div class="garis-ks">
+                ................................................................................................................................................................<br>
+                ................................................................................................................................................................<br>
+                ................................................................................................................................................................<br>
+                ................................................................................................................................................................
             </div>
+        </div>
         @endif
+
+    </div>
+    <!-- END PAGE CONTENT -->
 
     @endforeach
 
