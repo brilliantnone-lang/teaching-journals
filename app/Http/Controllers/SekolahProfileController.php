@@ -38,6 +38,7 @@ class SekolahProfileController extends Controller
             'dinas' => 'nullable|string|max:255',
             'nama_sekolah' => 'nullable|string|max:255',
             'alamat_sekolah' => 'nullable|string',
+            'kota' => 'nullable|string|max:100',
             'website_sekolah' => 'nullable|string|max:255',
             'kepala_sekolah' => 'nullable|string|max:255',
             'nip_kepala_sekolah' => 'nullable|string|max:50',
