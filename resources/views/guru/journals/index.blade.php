@@ -49,35 +49,41 @@
                         </td>
                         <td style="padding: 12px 16px; vertical-align: middle; text-align: center;">
                             <div class="btn-group" role="group" style="gap: 4px;">
-                                <a href="{{ route('guru.journals.show', $journal) }}" 
-                                   class="btn btn-sm" 
-                                   style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
-                                   title="Lihat Detail">
+                                <!-- SHOW -->
+                                <a href="{{ route('guru.journals.show', $journal) }}"
+                                    class="btn btn-sm"
+                                    style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
+                                    title="Lihat Detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('guru.journals.edit', $journal) }}" 
-                                   class="btn btn-sm" 
-                                   style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
-                                   title="Edit Jurnal">
+
+                                <!-- EDIT -->
+                                <a href="{{ route('guru.journals.edit', $journal) }}"
+                                    class="btn btn-sm"
+                                    style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
+                                    title="Edit Jurnal">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('guru.journals.export-pdf', $journal) }}" 
-                                   class="btn btn-sm" 
-                                   style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
-                                   title="Export PDF">
+
+                                <!-- PDF -->
+                                <a href="{{ route('guru.journals.export-pdf', $journal) }}"
+                                    class="btn btn-sm"
+                                    style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
+                                    title="Export PDF">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
-                                <form action="{{ route('guru.journals.destroy', $journal) }}" method="POST" class="d-inline" style="margin: 0;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                            class="btn btn-sm" 
-                                            style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus jurnal ini?')"
-                                            title="Hapus Jurnal">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
+
+                                <!-- DELETE - PAKAI MODAL -->
+                                <button type="button"
+                                    class="btn btn-sm btn-delete-journal"
+                                    style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
+                                    data-url="{{ route('guru.journals.destroy', $journal) }}"
+                                    data-teacher="{{ addslashes($journal->teacher_name) }}"
+                                    data-class="{{ addslashes($journal->class) }}"
+                                    data-date="{{ \Carbon\Carbon::parse($journal->date)->format('d-m-Y') }}"
+                                    title="Hapus Jurnal">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -92,4 +98,9 @@
     <i class="fas fa-info-circle me-1"></i> Total: <strong style="color: #94a3b8;">{{ $journals->count() }}</strong> jurnal
 </div>
 @endif
+
+<!-- ========================================== -->
+<!-- INCLUDE MODAL DELETE -->
+<!-- ========================================== -->
+@include('guru.journals.delete')
 @endsection

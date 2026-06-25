@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.index') || request()->routeIs('guru.journals.show') || request()->routeIs('guru.journals.edit') ? 'active' : '' }}">
+            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.index') || request()->routeIs('guru.journals.show') || request()->routeIs('guru.journals.edit') || request()->routeIs('guru.journals.delete') ? 'active' : '' }}">
                 <i class="fas fa-book"></i> Jurnal Saya
             </a>
         </li>
