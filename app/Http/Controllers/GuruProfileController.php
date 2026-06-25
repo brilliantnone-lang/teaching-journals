@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GuruProfile;
+use App\Models\TeachingJournal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,6 @@ class GuruProfileController extends Controller
     {
         $user = Auth::user();
         
-        // ✅ LANGSUNG PAKAI where()->first()
         $profile = GuruProfile::where('user_id', $user->id)->first();
         
         if ($profile) {
@@ -73,7 +73,39 @@ class GuruProfileController extends Controller
 
         $profile->update($validated);
 
+        // ✅ SINKRONISASI OTOMATIS KE SEMUA JURNAL
+        TeachingJournal::where('guru_profile_id', $profile->id)
+            ->update([
+                'teacher_name' => $profile->nama_guru,
+                'nip' => $profile->nip_guru,
+            ]);
+
         return redirect()->route('guru.dashboard')
-            ->with('success', 'Profil berhasil diupdate!');
+            ->with('success', 'Profil berhasil diupdate! Semua jurnal juga sudah disesuaikan.');
+    }
+
+    // ========================================== //
+    // ✅ TAMBAHKAN METHOD INI
+    // ========================================== //
+    public function syncJournals(Request $request)
+    {
+        $profile = GuruProfile::where('user_id', Auth::id())->first();
+        
+        if (!$profile) {
+            return back()->with('error', 'Profil tidak ditemukan.');
+        }
+
+        $updated = TeachingJournal::where('guru_profile_id', $profile->id)
+            ->update([
+                'teacher_name' => $profile->nama_guru,
+                'nip' => $profile->nip_guru,
+            ]);
+
+        $message = $updated > 0 
+            ? "Berhasil sinkronisasi $updated jurnal dengan data profil terbaru." 
+            : "Tidak ada jurnal yang perlu disinkronisasi.";
+
+        return redirect()->route('guru.profile.edit')
+            ->with('success', $message);
     }
 }

@@ -18,6 +18,9 @@
             @csrf
             @method('PUT')
 
+            <!-- ========================================== -->
+            <!-- DATA GURU & AKADEMIK -->
+            <!-- ========================================== -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -100,6 +103,9 @@
 
             <hr style="border-color: rgba(255,255,255,0.05);">
 
+            <!-- ========================================== -->
+            <!-- JAM & MATERI -->
+            <!-- ========================================== -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="mb-3">
@@ -166,6 +172,10 @@
             </div>
 
             <hr style="border-color: rgba(255,255,255,0.05);">
+
+            <!-- ========================================== -->
+            <!-- PRESENSI SISWA -->
+            <!-- ========================================== -->
             <h5 class="fw-bold text-white">📊 Presensi Siswa</h5>
 
             <div class="row">
@@ -242,15 +252,15 @@
                 </div>
             </div>
 
+            <!-- ========================================== -->
+            <!-- CATATAN -->
+            <!-- ========================================== -->
             <div class="mb-3">
                 <label class="form-label text-white fw-bold">Catatan Saat Mengajar</label>
                 <textarea name="notes" class="form-control" rows="2"
                     style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);color:white;border-radius:10px;">{{ old('notes', $journal->notes) }}</textarea>
             </div>
 
-            <!-- ========================================== -->
-            <!-- CATATAN KEPALA SEKOLAH -->
-            <!-- ========================================== -->
             <div class="mb-3">
                 <label class="form-label text-white fw-bold">
                     <i class="fas fa-pencil-alt" style="color: #fbbf24;"></i> Catatan Kepala Sekolah
@@ -262,6 +272,10 @@
             </div>
 
             <hr style="border-color: rgba(255,255,255,0.05);">
+
+            <!-- ========================================== -->
+            <!-- FOTO KEGIATAN -->
+            <!-- ========================================== -->
             <h5 class="fw-bold text-white">📷 Foto Kegiatan</h5>
 
             @if($journal->photo1)
@@ -303,16 +317,20 @@
                 </div>
             </div>
 
+            <!-- ========================================== -->
+            <!-- TOMBOL -->
+            <!-- ========================================== -->
             <div class="d-flex justify-content-between mt-3">
                 <a href="{{ route('guru.journals.index') }}" class="btn btn-secondary"
                     style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#94a3b8;border-radius:10px;padding:8px 24px;">
-                    Batal
+                    <i class="fas fa-arrow-left me-2"></i> Batal
                 </a>
                 <button type="submit" class="btn btn-primary"
                     style="background:linear-gradient(90deg, #4361ee, #3f37c9); color:white; border:none; border-radius:10px; padding:10px 32px; font-weight:600;">
                     <i class="fas fa-save me-2"></i> Update Jurnal
                 </button>
             </div>
+
         </form>
 
     </div>

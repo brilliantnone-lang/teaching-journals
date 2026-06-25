@@ -57,4 +57,6 @@ Route::middleware(['auth', 'guru'])->prefix('guru')->name('guru.')->group(functi
         Route::get('journals/{journal}/export-pdf', [TeachingJournalController::class, 'exportPdf'])->name('journals.export-pdf');
         Route::put('journals/{journal}/update-catatan', [TeachingJournalController::class, 'updateCatatan'])->name('journals.update-catatan'); 
     });
+
+    Route::post('/profile/sync', [GuruProfileController::class, 'syncJournals'])->name('profile.sync');
 });
