@@ -454,12 +454,6 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="icon"><i class="fas fa-id-card"></i></span>
-                        <input type="text" name="nip" placeholder="NIP (Opsional)" value="{{ old('nip') }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
                         <span class="icon"><i class="fas fa-lock"></i></span>
                         <input type="password" name="password" placeholder="Buat Password" required>
                     </div>
