@@ -25,6 +25,13 @@
         }
 
         /* ======================================== */
+        /* PAGE BREAK */
+        /* ======================================== */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* ======================================== */
         /* KOP SURAT */
         /* ======================================== */
         .kop-table {
@@ -158,7 +165,7 @@
         }
 
         /* ======================================== */
-        /* CATATAN KS */
+        /* CATATAN KS - SAMA KAYAK AWAL */
         /* ======================================== */
         .catatan-ks {
             margin-top: 15px;
@@ -230,8 +237,10 @@
     @endphp
 
     <!-- ========================================== -->
-    <!-- KOP SURAT - PAKAI DATA DARI DATABASE -->
+    <!-- HALAMAN 1: ISI JURNAL -->
     <!-- ========================================== -->
+
+    <!-- KOP SURAT -->
     <table class="kop-table">
         <tr>
             <td class="logo-cell">
@@ -258,17 +267,13 @@
 
     <div class="garis-kop"></div>
 
-    <!-- ========================================== -->
     <!-- JUDUL -->
-    <!-- ========================================== -->
     <div class="judul-container">
         <div class="judul-dokumen">JURNAL MENGAJAR HARIAN GURU</div>
         <div class="tahun-pelajaran">TAHUN PELAJARAN {{ $tahunPelajaran }}</div>
     </div>
 
-    <!-- ========================================== -->
     <!-- INFO GURU -->
-    <!-- ========================================== -->
     <table>
         <tr>
             <td style="width: 50%;">
@@ -284,9 +289,7 @@
         </tr>
     </table>
 
-    <!-- ========================================== -->
     <!-- MATERI & KEGIATAN -->
-    <!-- ========================================== -->
     <table>
         <tr>
             <th style="width: 18%;">MATERI</th>
@@ -302,9 +305,7 @@
         </tr>
     </table>
 
-    <!-- ========================================== -->
     <!-- PRESENSI SISWA -->
-    <!-- ========================================== -->
     <table>
         <tr>
             <th colspan="3">PRESENSI SISWA</th>
@@ -336,9 +337,7 @@
         </tr>
     </table>
 
-    <!-- ========================================== -->
     <!-- CATATAN SAAT MENGAJAR -->
-    <!-- ========================================== -->
     <table>
         <tr>
             <th>CATATAN SAAT MENGAJAR</th>
@@ -348,9 +347,7 @@
         </tr>
     </table>
 
-    <!-- ========================================== -->
     <!-- FOTO KEGIATAN -->
-    <!-- ========================================== -->
     <table>
         <tr>
             <th colspan="2">FOTO KEGIATAN</th>
@@ -373,9 +370,7 @@
         </tr>
     </table>
 
-    <!-- ========================================== -->
-    <!-- TANDA TANGAN - PAKAI DATA KEPSEK DARI DATABASE -->
-    <!-- ========================================== -->
+    <!-- TANDA TANGAN (Halaman 1) -->
     <table class="signature-table">
         <tr>
             <td style="width: 45%; text-align: center;">
@@ -397,11 +392,49 @@
     </table>
 
     <!-- ========================================== -->
-    <!-- CATATAN KEPALA SEKOLAH -->
+    <!-- PAGE BREAK: CATATAN KEPALA SEKOLAH DI HALAMAN BARU -->
+    <!-- ========================================== -->
+    <div class="page-break"></div>
+
+    <!-- ========================================== -->
+    <!-- HALAMAN 2: CATATAN KEPALA SEKOLAH (FORMAT SAMA KAYAK AWAL) -->
+    <!-- ========================================== -->
+
+    <!-- KOP SURAT LENGKAP (SAMA KAYAK HALAMAN 1) -->
+    <table class="kop-table">
+        <tr>
+            <td class="logo-cell">
+                @if($logoKiriBase64)
+                    <img src="{{ $logoKiriBase64 }}" class="logo-img" alt="Logo Kiri">
+                @endif
+            </td>
+
+            <td class="header-text">
+                <div class="provinsi">{{ $instansi }}</div>
+                <div class="dinas">{{ $dinas }}</div>
+                <div class="sekolah">{{ $namaSekolah }}</div>
+                <div class="alamat">{{ $alamatSekolah }}</div>
+                <div class="website">{{ $websiteSekolah }}</div>
+            </td>
+
+            <td class="logo-cell">
+                @if($logoKananBase64)
+                    <img src="{{ $logoKananBase64 }}" class="logo-img" alt="Logo Kanan">
+                @endif
+            </td>
+        </tr>
+    </table>
+
+    <div class="garis-kop"></div>
+
+    <!-- ========================================== -->
+    <!-- CATATAN KEPALA SEKOLAH - FORMAT SAMA KAYAK AWAL -->
     <!-- ========================================== -->
     <div class="catatan-ks">
         <div class="label-ks">Catatan Kepala Sekolah :</div>
         <div class="garis-ks">
+            ................................................................................................................................................................<br>
+            ................................................................................................................................................................<br>
             ................................................................................................................................................................<br>
             ................................................................................................................................................................
         </div>

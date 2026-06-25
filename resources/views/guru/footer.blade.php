@@ -4,7 +4,7 @@
             &copy; {{ date('Y') }} Jurnal Mengajar Guru
         </div>
         <div class="footer-right">
-            <span>SMK Negeri 1 Banjarmasin</span>
+            <span>SIGURU</span>
             <span class="separator">|</span>
             <span>v1.0</span>
         </div>
