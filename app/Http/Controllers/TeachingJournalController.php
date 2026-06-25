@@ -14,7 +14,7 @@ class TeachingJournalController extends Controller
     public function index()
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if ($profile) {
             $journals = TeachingJournal::where('guru_profile_id', $profile->id)
                 ->latest()
@@ -22,19 +22,19 @@ class TeachingJournalController extends Controller
         } else {
             $journals = collect();
         }
-        
+
         return view('guru.journals.index', compact('journals'));
     }
 
     public function create()
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile) {
             return redirect()->route('guru.profile.create')
                 ->with('warning', 'Silakan lengkapi profil terlebih dahulu.');
         }
-        
+
         return view('guru.journals.create', compact('profile'));
     }
 
@@ -73,7 +73,7 @@ class TeachingJournalController extends Controller
         }
 
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile) {
             return redirect()->route('guru.profile.create')
                 ->with('warning', 'Silakan lengkapi profil terlebih dahulu.');
@@ -92,43 +92,55 @@ class TeachingJournalController extends Controller
     public function show(TeachingJournal $journal)
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile || $journal->guru_profile_id !== $profile->id) {
             abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
         }
-        
+
         return view('guru.journals.show', compact('journal'));
     }
 
+    // ========================================== //
+    // EXPORT PDF - DENGAN 2 OPSI
+    // ========================================== //
     public function exportPdf(TeachingJournal $journal)
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile || $journal->guru_profile_id !== $profile->id) {
             abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
         }
-        
-        $pdf = Pdf::loadView('guru.journals.pdf', compact('journal'));
+
+        // Cek parameter: dengan atau tanpa catatan
+        $withNote = !request()->has('without_note');
+
+        $pdf = Pdf::loadView('guru.journals.pdf', compact('journal', 'withNote'));
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('jurnal-mengajar-' . $journal->date . '.pdf');
+        $filename = 'jurnal-mengajar-' . $journal->date . '.pdf';
+        if (!$withNote) {
+            $filename = 'jurnal-mengajar-' . $journal->date . '-tanpa-catatan.pdf';
+        }
+
+        return $pdf->download($filename);
     }
+
 
     public function edit(TeachingJournal $journal)
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile || $journal->guru_profile_id !== $profile->id) {
             abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
         }
-        
+
         return view('guru.journals.edit', compact('journal'));
     }
 
     public function update(Request $request, TeachingJournal $journal)
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile || $journal->guru_profile_id !== $profile->id) {
             abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
         }
@@ -180,7 +192,7 @@ class TeachingJournalController extends Controller
     public function destroy(TeachingJournal $journal)
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
-        
+
         if (!$profile || $journal->guru_profile_id !== $profile->id) {
             abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
         }
@@ -193,7 +205,7 @@ class TeachingJournalController extends Controller
         }
 
         $journal->delete();
-        
+
         return redirect()->route('guru.journals.index')
             ->with('success', 'Jurnal berhasil dihapus!');
     }

@@ -223,7 +223,6 @@
             color: #0000EE;
             font-size: 9pt;
             text-decoration: underline;
-            /* Garis bawah */
         }
 
         /* ======================================== */
@@ -236,14 +235,12 @@
 
         .logo-kiri {
             width: 80px;
-            /* Lebar lebih besar */
             height: 100px;
-            /* Tinggi lebih kecil → jadi lonjong */
             object-fit: contain;
         }
 
         /* ======================================== */
-        /* LOGO KANAN - TETAP PERSEGI (opsional) */
+        /* LOGO KANAN - TETAP PERSEGI */
         /* ======================================== */
         .logo-cell-right {
             width: 100px;
@@ -253,7 +250,6 @@
         .logo-kanan {
             width: 100px;
             height: 100px;
-            /* Tetap persegi */
             object-fit: contain;
         }
     </style>
@@ -265,57 +261,60 @@
     <!-- BASE64 LOGO, FOTO, & DATA SEKOLAH -->
     <!-- ========================================== -->
     @php
-    // ========================================== //
-    // AMBIL DATA SEKOLAH DARI DATABASE
-    // ========================================== //
-    $sekolah = \App\Models\SekolahProfile::where('guru_profile_id', $journal->guru_profile_id)->first();
+        // ========================================== //
+        // AMBIL DATA SEKOLAH DARI DATABASE
+        // ========================================== //
+        $sekolah = \App\Models\SekolahProfile::where('guru_profile_id', $journal->guru_profile_id)->first();
 
-    $instansi = $sekolah->instansi ?? 'PEMERINTAH PROVINSI KALIMANTAN SELATAN';
-    $dinas = $sekolah->dinas ?? 'DINAS PENDIDIKAN DAN KEBUDAYAAN';
-    $namaSekolah = $sekolah->nama_sekolah ?? 'SMK NEGERI 1 BANJARMASIN';
-    $alamatSekolah = $sekolah->alamat_sekolah ?? 'Jalan Mulawarman No. 45 Telp & Faxs. 0511-4368225 Banjarmasin 70117';
-    $kota = $sekolah->kota ?? 'Banjarmasin';
-    $websiteSekolah = $sekolah->website_sekolah ?? 'http://smkn1bjm.sch.id';
-    $kepalaSekolah = $sekolah->kepala_sekolah ?? 'Agustin Purnomosari, S.Pd., M.Pd';
-    $nipKepsek = $sekolah->nip_kepala_sekolah ?? '197208211998032007';
-    $tahunPelajaran = $sekolah->tahun_pelajaran ?? '2025/2026';
+        $instansi = $sekolah->instansi ?? 'PEMERINTAH PROVINSI KALIMANTAN SELATAN';
+        $dinas = $sekolah->dinas ?? 'DINAS PENDIDIKAN DAN KEBUDAYAAN';
+        $namaSekolah = $sekolah->nama_sekolah ?? 'SMK NEGERI 1 BANJARMASIN';
+        $alamatSekolah = $sekolah->alamat_sekolah ?? 'Jalan Mulawarman No. 45 Telp & Faxs. 0511-4368225 Banjarmasin 70117';
+        $kota = $sekolah->kota ?? 'Banjarmasin';
+        $websiteSekolah = $sekolah->website_sekolah ?? 'http://smkn1bjm.sch.id';
+        $kepalaSekolah = $sekolah->kepala_sekolah ?? 'Agustin Purnomosari, S.Pd., M.Pd';
+        $nipKepsek = $sekolah->nip_kepala_sekolah ?? '197208211998032007';
+        $tahunPelajaran = $sekolah->tahun_pelajaran ?? '2025/2026';
 
-    // ========================================== //
-    // LOGO
-    // ========================================== //
-    $logoKiriBase64 = '';
-    if ($sekolah && $sekolah->logo_kiri && file_exists(storage_path('app/public/'.$sekolah->logo_kiri))) {
-    $logoKiriPath = storage_path('app/public/'.$sekolah->logo_kiri);
-    $logoKiriBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($logoKiriPath));
-    }
+        // DEFAULT: dengan catatan kepala sekolah
+        $withNote = isset($withNote) ? $withNote : true;
 
-    $logoKananBase64 = '';
-    if ($sekolah && $sekolah->logo_kanan && file_exists(storage_path('app/public/'.$sekolah->logo_kanan))) {
-    $logoKananPath = storage_path('app/public/'.$sekolah->logo_kanan);
-    $logoKananBase64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoKananPath));
-    }
+        // ========================================== //
+        // LOGO
+        // ========================================== //
+        $logoKiriBase64 = '';
+        if ($sekolah && $sekolah->logo_kiri && file_exists(storage_path('app/public/'.$sekolah->logo_kiri))) {
+            $logoKiriPath = storage_path('app/public/'.$sekolah->logo_kiri);
+            $logoKiriBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($logoKiriPath));
+        }
 
-    // ========================================== //
-    // FOTO JURNAL
-    // ========================================== //
-    $foto1Base64 = '';
-    if ($journal->photo1 && file_exists(storage_path('app/public/'.$journal->photo1))) {
-    $foto1Path = storage_path('app/public/'.$journal->photo1);
-    $foto1Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto1Path));
-    }
+        $logoKananBase64 = '';
+        if ($sekolah && $sekolah->logo_kanan && file_exists(storage_path('app/public/'.$sekolah->logo_kanan))) {
+            $logoKananPath = storage_path('app/public/'.$sekolah->logo_kanan);
+            $logoKananBase64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoKananPath));
+        }
 
-    $foto2Base64 = '';
-    if ($journal->photo2 && file_exists(storage_path('app/public/'.$journal->photo2))) {
-    $foto2Path = storage_path('app/public/'.$journal->photo2);
-    $foto2Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto2Path));
-    }
+        // ========================================== //
+        // FOTO JURNAL
+        // ========================================== //
+        $foto1Base64 = '';
+        if ($journal->photo1 && file_exists(storage_path('app/public/'.$journal->photo1))) {
+            $foto1Path = storage_path('app/public/'.$journal->photo1);
+            $foto1Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto1Path));
+        }
 
-    // ========================================== //
-    // FORMAT NAMA SISWA VERTIKAL
-    // ========================================== //
-    $permitNames = $journal->permit_names ? explode(',', $journal->permit_names) : [];
-    $sickNames = $journal->sick_names ? explode(',', $journal->sick_names) : [];
-    $absentNames = $journal->absent_names ? explode(',', $journal->absent_names) : [];
+        $foto2Base64 = '';
+        if ($journal->photo2 && file_exists(storage_path('app/public/'.$journal->photo2))) {
+            $foto2Path = storage_path('app/public/'.$journal->photo2);
+            $foto2Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($foto2Path));
+        }
+
+        // ========================================== //
+        // FORMAT NAMA SISWA VERTIKAL
+        // ========================================== //
+        $permitNames = $journal->permit_names ? explode(',', $journal->permit_names) : [];
+        $sickNames = $journal->sick_names ? explode(',', $journal->sick_names) : [];
+        $absentNames = $journal->absent_names ? explode(',', $journal->absent_names) : [];
     @endphp
 
     <!-- ========================================== -->
@@ -327,7 +326,7 @@
         <tr>
             <td class="logo-cell-left">
                 @if($logoKiriBase64)
-                <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
+                    <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
                 @endif
             </td>
 
@@ -341,7 +340,7 @@
 
             <td class="logo-cell-right">
                 @if($logoKananBase64)
-                <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
+                    <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
                 @endif
             </td>
         </tr>
@@ -355,20 +354,13 @@
         <div class="tahun-pelajaran">TAHUN PELAJARAN {{ $tahunPelajaran }}</div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- INFO GURU - 6 KOLOM (3 KIRI, 3 KANAN) SEJAJAR -->
-    <!-- ========================================== -->
+    <!-- INFO GURU -->
     <table class="info-guru-table">
         <tr>
-            <!-- KOLOM KIRI -->
             <td class="label" style="width: 90px;">Nama Guru</td>
             <td class="value" style="width: 1px;">:</td>
             <td class="value">{{ $journal->teacher_name }}</td>
-
-            <!-- SPASI -->
             <td style="width: 20px;"></td>
-
-            <!-- KOLOM KANAN -->
             <td class="label" style="width: 110px;">Mata Pelajaran</td>
             <td class="value" style="width: 1px;">:</td>
             <td class="value">{{ $journal->subject }}</td>
@@ -429,13 +421,13 @@
             <td>{{ $journal->permit }}</td>
             <td>
                 @if(count($permitNames) > 0)
-                <ul class="nama-siswa-list">
-                    @foreach($permitNames as $name)
-                    <li>{{ trim($name) }}</li>
-                    @endforeach
-                </ul>
+                    <ul class="nama-siswa-list">
+                        @foreach($permitNames as $name)
+                            <li>{{ trim($name) }}</li>
+                        @endforeach
+                    </ul>
                 @else
-                -
+                    -
                 @endif
             </td>
         </tr>
@@ -444,13 +436,13 @@
             <td>{{ $journal->sick }}</td>
             <td>
                 @if(count($sickNames) > 0)
-                <ul class="nama-siswa-list">
-                    @foreach($sickNames as $name)
-                    <li>{{ trim($name) }}</li>
-                    @endforeach
-                </ul>
+                    <ul class="nama-siswa-list">
+                        @foreach($sickNames as $name)
+                            <li>{{ trim($name) }}</li>
+                        @endforeach
+                    </ul>
                 @else
-                -
+                    -
                 @endif
             </td>
         </tr>
@@ -459,13 +451,13 @@
             <td>{{ $journal->absent }}</td>
             <td>
                 @if(count($absentNames) > 0)
-                <ul class="nama-siswa-list">
-                    @foreach($absentNames as $name)
-                    <li>{{ trim($name) }}</li>
-                    @endforeach
-                </ul>
+                    <ul class="nama-siswa-list">
+                        @foreach($absentNames as $name)
+                            <li>{{ trim($name) }}</li>
+                        @endforeach
+                    </ul>
                 @else
-                -
+                    -
                 @endif
             </td>
         </tr>
@@ -489,16 +481,16 @@
         <tr>
             <td class="foto-cell" style="width: 50%;">
                 @if($foto1Base64)
-                <img src="{{ $foto1Base64 }}" alt="Foto 1">
+                    <img src="{{ $foto1Base64 }}" alt="Foto 1">
                 @else
-                <span class="no-photo">[Foto 1]</span>
+                    <span class="no-photo">[Foto 1]</span>
                 @endif
             </td>
             <td class="foto-cell" style="width: 50%;">
                 @if($foto2Base64)
-                <img src="{{ $foto2Base64 }}" alt="Foto 2">
+                    <img src="{{ $foto2Base64 }}" alt="Foto 2">
                 @else
-                <span class="no-photo">[Foto 2]</span>
+                    <span class="no-photo">[Foto 2]</span>
                 @endif
             </td>
         </tr>
@@ -526,51 +518,50 @@
     </table>
 
     <!-- ========================================== -->
-    <!-- PAGE BREAK: CATATAN KEPALA SEKOLAH -->
+    <!-- PAGE BREAK + CATATAN KEPALA SEKOLAH -->
+    <!-- HANYA JIKA withNote = true -->
     <!-- ========================================== -->
-    <div class="page-break"></div>
+    @if($withNote)
+        <div class="page-break"></div>
 
-    <!-- ========================================== -->
-    <!-- HALAMAN 2: CATATAN KEPALA SEKOLAH -->
-    <!-- ========================================== -->
+        <!-- HALAMAN 2: CATATAN KEPALA SEKOLAH -->
+        <table class="kop-table">
+            <tr>
+                <td class="logo-cell-left">
+                    @if($logoKiriBase64)
+                        <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
+                    @endif
+                </td>
 
-    <!-- KOP SURAT -->
-    <table class="kop-table">
-        <tr>
-            <td class="logo-cell-left">
-                @if($logoKiriBase64)
-                <img src="{{ $logoKiriBase64 }}" class="logo-kiri" alt="Logo Kiri">
-                @endif
-            </td>
+                <td class="header-text">
+                    <div class="provinsi">{{ $instansi }}</div>
+                    <div class="dinas">{{ $dinas }}</div>
+                    <div class="sekolah">{{ $namaSekolah }}</div>
+                    <div class="alamat">{{ $alamatSekolah }}</div>
+                    <div class="website-link">{{ $websiteSekolah }}</div>
+                </td>
 
-            <td class="header-text">
-                <div class="provinsi">{{ $instansi }}</div>
-                <div class="dinas">{{ $dinas }}</div>
-                <div class="sekolah">{{ $namaSekolah }}</div>
-                <div class="alamat">{{ $alamatSekolah }}</div>
-                <div class="website-link">{{ $websiteSekolah }}</div>
-            </td>
+                <td class="logo-cell-right">
+                    @if($logoKananBase64)
+                        <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
+                    @endif
+                </td>
+            </tr>
+        </table>
 
-            <td class="logo-cell-right">
-                @if($logoKananBase64)
-                <img src="{{ $logoKananBase64 }}" class="logo-kanan" alt="Logo Kanan">
-                @endif
-            </td>
-        </tr>
-    </table>
+        <div class="garis-kop"></div>
 
-    <div class="garis-kop"></div>
-
-    <!-- CATATAN KEPALA SEKOLAH -->
-    <div class="catatan-ks">
-        <div class="label-ks">Catatan Kepala Sekolah :</div>
-        <div class="garis-ks">
-            ................................................................................................................................................................<br>
-            ................................................................................................................................................................<br>
-            ................................................................................................................................................................<br>
-            ................................................................................................................................................................
+        <div class="catatan-ks">
+            <div class="label-ks">Catatan Kepala Sekolah :</div>
+            <div class="garis-ks">
+                ................................................................................................................................................................<br>
+                ................................................................................................................................................................<br>
+                ................................................................................................................................................................<br>
+                ................................................................................................................................................................
+            </div>
         </div>
-    </div>
+
+    @endif
 
 </body>
 

@@ -52,19 +52,39 @@
                                 <td>{{ \Str::limit($jurnal->material, 30) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($jurnal->date)->format('d-m-Y') }}</td>
                                 <td>
-                                    <!-- ✅ PAKAI guru.journals.* -->
-                                    <a href="{{ route('guru.journals.show', $jurnal) }}" class="btn btn-sm btn-info">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('guru.journals.export-pdf', $jurnal) }}" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-file-pdf"></i>
-                                    </a>
+                                    <div class="btn-group" role="group" style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                        <!-- SHOW -->
+                                        <a href="{{ route('guru.journals.show', $jurnal) }}" 
+                                           class="btn btn-sm" 
+                                           style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: none; border-radius: 8px; padding: 6px 12px;"
+                                           title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <!-- PDF DENGAN CATATAN -->
+                                        <a href="{{ route('guru.journals.export-pdf', $jurnal) }}" 
+                                           class="btn btn-sm" 
+                                           style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: none; border-radius: 8px; padding: 6px 12px;"
+                                           title="Export PDF dengan Catatan Kepala Sekolah">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span style="font-size: 0.65rem; margin-left: 2px;">+Catatan</span>
+                                        </a>
+
+                                        <!-- PDF TANPA CATATAN -->
+                                        <a href="{{ route('guru.journals.export-pdf', $jurnal) }}?without_note=true" 
+                                           class="btn btn-sm" 
+                                           style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px;"
+                                           title="Export PDF Tanpa Catatan Kepala Sekolah">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span style="font-size: 0.65rem; margin-left: 2px;">Tanpa</span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             @empty
                             <tr>
                                 <td colspan="5" class="text-center text-muted">
-                                    Belum ada jurnal. 
+                                    Belum ada jurnal.
                                     <a href="{{ route('guru.journals.create') }}">Buat jurnal sekarang</a>
                                 </td>
                             </tr>

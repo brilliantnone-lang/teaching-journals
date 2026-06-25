@@ -65,11 +65,19 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
 
-                                <!-- PDF -->
+                                <!-- PDF + Catatan -->
                                 <a href="{{ route('guru.journals.export-pdf', $journal) }}"
                                     class="btn btn-sm"
-                                    style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
-                                    title="Export PDF">
+                                    style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: none; border-radius: 8px; padding: 6px 12px;"
+                                    title="Export PDF dengan Catatan Kepala Sekolah">
+                                    <i class="fas fa-file-pdf"></i>
+                                </a>
+
+                                <!-- PDF Tanpa Catatan -->
+                                <a href="{{ route('guru.journals.export-pdf', $journal) }}?without_note=true"
+                                    class="btn btn-sm"
+                                    style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px;"
+                                    title="Export PDF Tanpa Catatan Kepala Sekolah">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
 
