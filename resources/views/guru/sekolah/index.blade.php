@@ -3,10 +3,68 @@
 @section('title', 'Setting Sekolah')
 
 @section('content')
+
+<style>
+    /* ========================================== */
+    /* RESPONSIF SETTING SEKOLAH */
+    /* ========================================== */
+
+    @media (max-width: 992px) {
+        .page-content {
+            padding: 16px !important;
+        }
+
+        .card .card-body {
+            padding: 16px !important;
+        }
+
+        .row .col-md-6 {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .page-content {
+            padding: 12px !important;
+        }
+
+        .card-header {
+            font-size: 0.9rem !important;
+            padding: 10px 14px !important;
+        }
+
+        .form-control {
+            font-size: 14px !important;
+            padding: 8px 12px !important;
+        }
+
+        .btn {
+            padding: 8px 16px !important;
+            font-size: 0.85rem !important;
+            width: 100% !important;
+        }
+
+        .form-label {
+            font-size: 0.85rem !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 12px !important;
+        }
+
+        /* Gambar logo di mobile */
+        .logo-preview img {
+            max-height: 60px !important;
+        }
+    }
+</style>
+
 <div class="row">
     <div class="col-md-12">
-        <h1 class="mb-2">🏫 Setting Sekolah</h1>
-        <p class="text-muted">Isi data sekolah untuk ditampilkan di kop surat jurnal</p>
+        <h1 class="mb-2" style="color: #f8fafc;">🏫 Setting Sekolah</h1>
+        <p class="text-muted" style="font-size: 0.95rem;">Isi data sekolah untuk ditampilkan di kop surat jurnal</p>
     </div>
 </div>
 
@@ -21,11 +79,12 @@
                     @csrf
 
                     <div class="row">
+                        <!-- KOLOM KIRI -->
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label text-white">Logo Kiri</label>
                                 @if($sekolah && $sekolah->logo_kiri)
-                                <div class="mb-2">
+                                <div class="mb-2 logo-preview">
                                     <img src="{{ asset('storage/'.$sekolah->logo_kiri) }}"
                                         style="max-height:80px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
                                 </div>
@@ -38,7 +97,7 @@
                             <div class="mb-3">
                                 <label class="form-label text-white">Logo Kanan</label>
                                 @if($sekolah && $sekolah->logo_kanan)
-                                <div class="mb-2">
+                                <div class="mb-2 logo-preview">
                                     <img src="{{ asset('storage/'.$sekolah->logo_kanan) }}"
                                         style="max-height:80px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
                                 </div>
@@ -73,8 +132,8 @@
                             </div>
                         </div>
 
+                        <!-- KOLOM KANAN -->
                         <div class="col-md-6">
-
                             <div class="mb-3">
                                 <label class="form-label text-white">Kota</label>
                                 <input type="text" name="kota" class="form-control"

@@ -19,6 +19,7 @@ class GuruDashboardController extends Controller
                 'journals' => collect(),
                 'selectedMonth' => date('m'),
                 'selectedYear' => date('Y'),
+                'totalJurnal' => 0,  // ✅ TAMBAHKAN
             ]);
         }
 
@@ -34,21 +35,23 @@ class GuruDashboardController extends Controller
 
         $journals = $query->orderBy('date', 'desc')->get();
 
+        // ✅ HITUNG TOTAL JURNAL
+        $totalJurnal = TeachingJournal::where('guru_profile_id', $profile->id)->count();
+
         return view('guru.dashboard', compact(
             'journals',
             'selectedMonth',
             'selectedYear',
-            'profile'
+            'profile',
+            'totalJurnal'  // ✅ TAMBAHKAN
         ));
     }
 
-    // Export PDF Bulanan - Dengan Catatan
     public function exportMonthlyWithNote(Request $request)
     {
         return $this->exportMonthly($request, true);
     }
 
-    // Export PDF Bulanan - Tanpa Catatan
     public function exportMonthlyWithoutNote(Request $request)
     {
         return $this->exportMonthly($request, false);

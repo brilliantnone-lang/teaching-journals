@@ -3,6 +3,112 @@
 @section('title', 'Daftar Jurnal')
 
 @section('content')
+
+<style>
+    /* ========================================== */
+    /* RESPONSIF INDEX JURNAL */
+    /* ========================================== */
+
+    @media (max-width: 992px) {
+        .page-content {
+            padding: 16px !important;
+        }
+
+        .card .card-body {
+            padding: 16px !important;
+        }
+
+        .table-responsive {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        .d-flex.justify-content-between {
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+        }
+
+        .d-flex.justify-content-between .btn {
+            width: auto !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .page-content {
+            padding: 12px !important;
+        }
+
+        h1 {
+            font-size: 1.3rem !important;
+        }
+
+        .card-header {
+            font-size: 0.9rem !important;
+            padding: 10px 14px !important;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: column !important;
+            gap: 8px !important;
+            align-items: stretch !important;
+        }
+
+        .d-flex.justify-content-between .btn {
+            width: 100% !important;
+            text-align: center !important;
+            justify-content: center !important;
+        }
+
+        .btn-group {
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+        }
+
+        .btn-group .btn {
+            padding: 4px 10px !important;
+            font-size: 0.7rem !important;
+        }
+
+        .table td,
+        .table th {
+            padding: 6px 8px !important;
+            font-size: 0.7rem !important;
+        }
+
+        .badge {
+            font-size: 0.6rem !important;
+            padding: 2px 8px !important;
+        }
+
+        .table th {
+            font-size: 0.6rem !important;
+            padding: 8px 6px !important;
+        }
+
+        .alert {
+            padding: 12px !important;
+            font-size: 0.85rem !important;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .table td,
+        .table th {
+            padding: 4px 4px !important;
+            font-size: 0.6rem !important;
+        }
+
+        .btn-group .btn {
+            padding: 2px 6px !important;
+            font-size: 0.6rem !important;
+        }
+
+        .btn-group .btn i {
+            font-size: 0.6rem !important;
+        }
+    }
+</style>
+
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h1 class="mb-1" style="color: #f8fafc;">📋 Daftar Jurnal Mengajar</h1>
@@ -48,7 +154,7 @@
                             </span>
                         </td>
                         <td style="padding: 12px 16px; vertical-align: middle; text-align: center;">
-                            <div class="btn-group" role="group" style="gap: 4px;">
+                            <div class="btn-group" role="group" style="gap: 4px; flex-wrap: wrap; justify-content: center;">
                                 <!-- SHOW -->
                                 <a href="{{ route('guru.journals.show', $journal) }}"
                                     class="btn btn-sm"
@@ -81,7 +187,7 @@
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
 
-                                <!-- DELETE - PAKAI MODAL -->
+                                <!-- DELETE -->
                                 <button type="button"
                                     class="btn btn-sm btn-delete-journal"
                                     style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px; transition: all 0.2s;"
@@ -111,4 +217,5 @@
 <!-- INCLUDE MODAL DELETE -->
 <!-- ========================================== -->
 @include('guru.journals.delete')
+
 @endsection

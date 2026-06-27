@@ -3,14 +3,114 @@
 @section('title', 'Dashboard Guru')
 
 @section('content')
+
+<style>
+    /* ========================================== */
+    /* RESPONSIF DASHBOARD GURU */
+    /* ========================================== */
+
+    /* Tablet */
+    @media (max-width: 992px) {
+        .page-content {
+            padding: 16px !important;
+        }
+
+        .card .card-body {
+            padding: 16px !important;
+        }
+
+        .row.mt-4 .col-md-4 {
+            width: 50% !important;
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+        }
+
+        .table-responsive {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+        }
+
+        .row .col-md-6 {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
+        .info-guru-grid {
+            grid-template-columns: 1fr 1fr !important;
+        }
+    }
+
+    /* HP Kecil */
+    @media (max-width: 576px) {
+        .page-content {
+            padding: 12px !important;
+        }
+
+        .row.mt-4 .col-md-4 {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
+        .form-control {
+            font-size: 14px !important;
+        }
+
+        .logout-btn {
+            padding: 4px 10px !important;
+            font-size: 0.7rem !important;
+        }
+
+        .user-info .avatar {
+            width: 28px !important;
+            height: 28px !important;
+            font-size: 0.7rem !important;
+        }
+
+        .card-header {
+            font-size: 0.9rem !important;
+            padding: 10px 14px !important;
+        }
+
+        .btn-group {
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+
+        .d-flex.justify-content-between .btn,
+        .d-flex.justify-content-between button {
+            width: 100% !important;
+        }
+
+        .info-guru-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* Grid info guru */
+    .info-guru-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-12">
-        <h1 class="mb-2">Dashboard Guru</h1>
-        <p class="text-muted">Selamat datang, {{ Auth::user()->name }}!</p>
+        <h1 class="mb-2" style="color: #f8fafc;">Dashboard Guru</h1>
+        <p class="text-muted" style="font-size: 0.95rem;">Selamat datang, {{ Auth::user()->name }}!</p>
     </div>
 </div>
 
-<!-- CEK APAKAH PROFIL SUDAH LENGKAP -->
+<!-- ========================================== -->
+<!-- CEK PROFIL -->
+<!-- ========================================== -->
 @if(!Auth::user()->hasCompleteProfile())
 <div class="row mt-4">
     <div class="col-md-12">
@@ -27,7 +127,7 @@
 @endif
 
 <!-- ========================================== -->
-<!-- FILTER BULAN & EXPORT PDF BULANAN -->
+<!-- FILTER BULAN -->
 <!-- ========================================== -->
 <div class="row mt-4">
     <div class="col-md-12">
@@ -67,19 +167,14 @@
                     </div>
                     <div class="col-md-3">
                         <div class="d-flex gap-2">
-                            <!-- Tombol Export Dengan Catatan -->
-                            <button type="button"
-                                class="btn btn-success flex-fill btn-export-monthly"
-                                data-url="{{ route('guru.dashboard.export-monthly-with-note', ['month' => $selectedMonth ?? date('m'), 'year' => $selectedYear ?? date('Y')]) }}"
-                                data-message="Export Jurnal Bulanan dengan Catatan Kepala Sekolah">
+                            <button type="button" class="btn btn-success flex-fill btn-export-monthly"
+                                    data-url="{{ route('guru.dashboard.export-monthly-with-note', ['month' => $selectedMonth ?? date('m'), 'year' => $selectedYear ?? date('Y')]) }}"
+                                    data-message="Export Jurnal Bulanan dengan Catatan Kepala Sekolah">
                                 <i class="fas fa-file-pdf me-1"></i> +Catatan
                             </button>
-
-                            <!-- Tombol Export Tanpa Catatan -->
-                            <button type="button"
-                                class="btn btn-danger flex-fill btn-export-monthly"
-                                data-url="{{ route('guru.dashboard.export-monthly-without-note', ['month' => $selectedMonth ?? date('m'), 'year' => $selectedYear ?? date('Y')]) }}"
-                                data-message="Export Jurnal Bulanan Tanpa Catatan Kepala Sekolah">
+                            <button type="button" class="btn btn-danger flex-fill btn-export-monthly"
+                                    data-url="{{ route('guru.dashboard.export-monthly-without-note', ['month' => $selectedMonth ?? date('m'), 'year' => $selectedYear ?? date('Y')]) }}"
+                                    data-message="Export Jurnal Bulanan Tanpa Catatan Kepala Sekolah">
                                 <i class="fas fa-file-pdf me-1"></i> Tanpa
                             </button>
                         </div>
@@ -91,7 +186,7 @@
 </div>
 
 <!-- ========================================== -->
-<!-- DAFTAR JURNAL FILTER -->
+<!-- DAFTAR JURNAL -->
 <!-- ========================================== -->
 <div class="row mt-4">
     <div class="col-md-12">
@@ -130,18 +225,24 @@
                                 <td>{{ \Carbon\Carbon::parse($jurnal->date)->format('d-m-Y') }}</td>
                                 <td>
                                     <div class="btn-group" style="gap: 4px; flex-wrap: wrap;">
-                                        <a href="{{ route('guru.journals.show', $jurnal) }}"
-                                            class="btn btn-sm btn-info" title="Lihat Detail">
+                                        <a href="{{ route('guru.journals.show', $jurnal) }}" class="btn btn-sm btn-info" title="Lihat Detail">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('guru.journals.export-pdf', $jurnal) }}"
-                                            class="btn btn-sm btn-success" title="PDF + Catatan">
+                                        <a href="{{ route('guru.journals.export-pdf', $jurnal) }}" class="btn btn-sm btn-success" title="PDF + Catatan">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
-                                        <a href="{{ route('guru.journals.export-pdf', $jurnal) }}?without_note=true"
-                                            class="btn btn-sm btn-danger" title="PDF Tanpa Catatan">
+                                        <a href="{{ route('guru.journals.export-pdf', $jurnal) }}?without_note=true" class="btn btn-sm btn-danger" title="PDF Tanpa Catatan">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
+                                        <button type="button" class="btn btn-sm btn-delete"
+                                                style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px;"
+                                                data-url="{{ route('guru.journals.destroy', $jurnal) }}"
+                                                data-teacher="{{ $jurnal->teacher_name }}"
+                                                data-class="{{ $jurnal->class }}"
+                                                data-date="{{ \Carbon\Carbon::parse($jurnal->date)->format('d-m-Y') }}"
+                                                title="Hapus Jurnal">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -163,7 +264,7 @@
 </div>
 
 <!-- ========================================== -->
-<!-- MODAL KONFIRMASI EXPORT PDF BULANAN -->
+<!-- MODAL EXPORT -->
 <!-- ========================================== -->
 <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -219,10 +320,16 @@
 </div>
 
 <!-- ========================================== -->
-<!-- JAVASCRIPT MODAL -->
+<!-- MODAL HAPUS -->
+<!-- ========================================== -->
+@include('guru.journals.delete')
+
+<!-- ========================================== -->
+<!-- JAVASCRIPT -->
 <!-- ========================================== -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Export Modal
         var exportButtons = document.querySelectorAll('.btn-export-monthly');
         var exportModal = document.getElementById('exportModal');
         var exportMessage = document.getElementById('exportMessage');
@@ -244,5 +351,4 @@
         }
     });
 </script>
-
 @endsection
