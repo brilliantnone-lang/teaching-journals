@@ -127,7 +127,7 @@
                                 <label class="form-label text-white">Nama Sekolah</label>
                                 <input type="text" name="nama_sekolah" class="form-control"
                                     value="{{ old('nama_sekolah', $sekolah->nama_sekolah ?? '') }}"
-                                    placeholder="Contoh: SMK NEGERI 1 BANJARMASIN"
+                                    placeholder="Contoh: SMA NEGERI 1 KEDUNGSARI"
                                     style="background:#0f172a;border:1px solid rgba(255,255,255,0.1);color:white;">
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                             <div class="mb-3">
                                 <label class="form-label text-white">Alamat Sekolah</label>
                                 <textarea name="alamat_sekolah" class="form-control" rows="2"
-                                    placeholder="Contoh: Jalan Mulawarman No. 45 Telp & Faxs. 0511-4368225 Banjarmasin 70117"
+                                    placeholder="Contoh: Jalan Pendidikan No. 123, Kelurahan Maju Jaya, Kecamatan Sejahtera, Kota Baru 12345, Telp. (021) 1234567, Fax. (021) 7654321"
                                     style="background:#0f172a;border:1px solid rgba(255,255,255,0.1);color:white;">{{ old('alamat_sekolah', $sekolah->alamat_sekolah ?? '') }}</textarea>
                             </div>
 
@@ -153,7 +153,7 @@
                                 <label class="form-label text-white">Website Sekolah</label>
                                 <input type="text" name="website_sekolah" class="form-control"
                                     value="{{ old('website_sekolah', $sekolah->website_sekolah ?? '') }}"
-                                    placeholder="Contoh: http://smkn1bjm.sch.id"
+                                    placeholder="Contoh: http://sman1kedungsari.sch.id"
                                     style="background:#0f172a;border:1px solid rgba(255,255,255,0.1);color:white;">
                             </div>
 
@@ -161,7 +161,7 @@
                                 <label class="form-label text-white">Nama Kepala Sekolah</label>
                                 <input type="text" name="kepala_sekolah" class="form-control"
                                     value="{{ old('kepala_sekolah', $sekolah->kepala_sekolah ?? '') }}"
-                                    placeholder="Contoh: Agustin Purnomosari, S.Pd., M.Pd"
+                                    placeholder="Contoh: Drs. H. Imam Santoso, M.Pd"
                                     style="background:#0f172a;border:1px solid rgba(255,255,255,0.1);color:white;">
                             </div>
 
@@ -169,7 +169,7 @@
                                 <label class="form-label text-white">NIP Kepala Sekolah</label>
                                 <input type="text" name="nip_kepala_sekolah" class="form-control"
                                     value="{{ old('nip_kepala_sekolah', $sekolah->nip_kepala_sekolah ?? '') }}"
-                                    placeholder="Contoh: 197208211998032007"
+                                    placeholder="Contoh: 196805201995031002"
                                     style="background:#0f172a;border:1px solid rgba(255,255,255,0.1);color:white;">
                             </div>
 
