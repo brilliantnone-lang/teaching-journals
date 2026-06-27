@@ -154,17 +154,27 @@
         .sidebar-toggle {
             display: block !important;
         }
+
+        /* ✅ NAMA GURU TETAP MUNCUL */
         .user-info .user-name {
-            display: none;
+            display: block !important;
+            font-size: 0.75rem !important;
         }
+
+        /* ✅ ROLE GURU TETAP MUNCUL */
         .user-info .user-role {
-            display: none;
+            display: block !important;
+            font-size: 0.6rem !important;
         }
+
+        /* ✅ BRAND SINGKAT (hanya icon) */
         .brand span {
-            display: none;
+            display: none !important;
         }
+
+        /* ✅ LOGOUT HANYA ICON */
         .logout-btn span {
-            display: none;
+            display: none !important;
         }
     }
 </style>
