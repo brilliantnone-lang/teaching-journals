@@ -25,7 +25,6 @@
                     </div>
                 </div>
             </div>
-            <!-- TOMBOL LOGOUT - BUKA MODAL -->
             <button type="button" class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </button>
@@ -34,7 +33,6 @@
 </header>
 
 <style>
-    /* CSS sama seperti sebelumnya */
     .header {
         background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);
@@ -151,9 +149,10 @@
         border-color: #ef4444;
     }
 
+    /* ✅ TAMPILKAN TOMBOL HAMBURGER DI MOBILE */
     @media (max-width: 768px) {
         .sidebar-toggle {
-            display: block;
+            display: block !important;
         }
         .user-info .user-name {
             display: none;
@@ -169,16 +168,3 @@
         }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleBtn = document.getElementById('sidebarToggle');
-        const sidebar = document.querySelector('.sidebar');
-
-        if (toggleBtn && sidebar) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('open');
-            });
-        }
-    });
-</script>

@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.index') || request()->routeIs('guru.journals.show') || request()->routeIs('guru.journals.edit') || request()->routeIs('guru.journals.delete') ? 'active' : '' }}">
+            <a href="{{ route('guru.journals.index') }}" class="{{ request()->routeIs('guru.journals.index') ? 'active' : '' }}">
                 <i class="fas fa-book"></i> Jurnal Saya
             </a>
         </li>
@@ -48,9 +48,14 @@
         left: 0;
         top: 0;
         overflow-y: auto;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
         z-index: 999;
         padding: 20px 0;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
     }
 
     .sidebar::-webkit-scrollbar {
@@ -144,6 +149,14 @@
         color: #f8fafc;
     }
 
+    /* ✅ Di desktop, sidebar tetap terbuka */
+    @media (min-width: 769px) {
+        .sidebar {
+            transform: translateX(0);
+        }
+    }
+
+    /* ✅ Di mobile, sidebar tersembunyi */
     @media (max-width: 768px) {
         .sidebar {
             transform: translateX(-100%);
@@ -151,21 +164,6 @@
 
         .sidebar.open {
             transform: translateX(0);
-        }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-        }
-
-        .sidebar.open~.sidebar-overlay {
-            display: block;
         }
     }
 </style>

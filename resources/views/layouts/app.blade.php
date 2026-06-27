@@ -104,14 +104,14 @@
     <!-- SIDEBAR (HANYA UNTUK GURU) -->
     <!-- ========================================== -->
     @auth
-        @php
-            $isAdmin = Auth::user()->role === 'admin';
-            $isGuru = Auth::user()->role === 'guru';
-        @endphp
+    @php
+    $isAdmin = Auth::user()->role === 'admin';
+    $isGuru = Auth::user()->role === 'guru';
+    @endphp
 
-        @if($isGuru)
-            @include('guru.sidebar')
-        @endif
+    @if($isGuru)
+    @include('guru.sidebar')
+    @endif
     @endauth
 
     <!-- ========================================== -->
@@ -123,11 +123,11 @@
         <!-- HEADER -->
         <!-- ========================================== -->
         @auth
-            @if($isAdmin)
-                @include('admin.header')
-            @else
-                @include('guru.header')
-            @endif
+        @if($isAdmin)
+        @include('admin.header')
+        @else
+        @include('guru.header')
+        @endif
         @endauth
 
         <!-- ========================================== -->
@@ -136,17 +136,17 @@
         <div class="page-content">
 
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
             @endif
 
             @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
+            <div class="alert alert-danger alert-dismissible fade show">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
             @endif
 
             @yield('content')
@@ -156,11 +156,11 @@
         <!-- FOOTER -->
         <!-- ========================================== -->
         @auth
-            @if($isAdmin)
-                @include('admin.footer')
-            @else
-                @include('guru.footer')
-            @endif
+        @if($isAdmin)
+        @include('admin.footer')
+        @else
+        @include('guru.footer')
+        @endif
         @endauth
 
     </div>
@@ -206,20 +206,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const toggleBtn = document.getElementById('sidebarToggle');
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
+            console.log('DOM Loaded - Sidebar Toggle Ready');
+
+            var toggleBtn = document.getElementById('sidebarToggle');
+            var sidebar = document.querySelector('.sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+
+            console.log('Toggle Button:', toggleBtn);
+            console.log('Sidebar:', sidebar);
+            console.log('Overlay:', overlay);
 
             if (toggleBtn && sidebar && overlay) {
-                toggleBtn.addEventListener('click', function() {
+                toggleBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    console.log('Toggle button clicked!');
                     sidebar.classList.toggle('open');
-                    overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+                    if (sidebar.classList.contains('open')) {
+                        overlay.style.display = 'block';
+                    } else {
+                        overlay.style.display = 'none';
+                    }
+                    console.log('Sidebar open:', sidebar.classList.contains('open'));
                 });
 
                 overlay.addEventListener('click', function() {
                     sidebar.classList.remove('open');
                     overlay.style.display = 'none';
                 });
+            } else {
+                console.warn('Toggle button, sidebar, or overlay not found!');
             }
         });
     </script>
