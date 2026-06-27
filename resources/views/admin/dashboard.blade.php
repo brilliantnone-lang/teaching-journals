@@ -146,48 +146,47 @@
     </div>
 </div>
 
-<!-- JURNAL TERBARU -->
+<!-- DAFTAR GURU & JUMLAH JURNAL -->
 <div class="row mt-4">
     <div class="col-md-12">
         <div class="card card-dark">
             <div class="card-header">
-                <i class="fas fa-clock"></i> Jurnal Terbaru
-                <span class="badge bg-info ms-2">{{ $jurnalTerbaru->count() }} data</span>
+                <i class="fas fa-users"></i> Daftar Guru & Jumlah Jurnal
+                <span class="badge bg-info ms-2">{{ $daftarGuru->count() }} guru</span>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-dark-custom">
                         <thead>
                             <tr>
-                                <th>Guru</th>
-                                <th>Kelas</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Materi</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
+                                <th>No</th>
+                                <th>Nama Guru</th>
+                                <th>Asal Sekolah</th>
+                                <th>Total Jurnal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($jurnalTerbaru as $jurnal)
+                            @forelse($daftarGuru as $key => $guru)
                             <tr>
-                                <td>{{ $jurnal->teacher_name }}</td>
-                                <td>{{ $jurnal->class }}</td>
-                                <td>{{ $jurnal->subject }}</td>
-                                <td>{{ \Str::limit($jurnal->material, 25) }}</td>
-                                <td>{{ \Carbon\Carbon::parse($jurnal->date)->format('d-m-Y') }}</td>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $guru->nama_guru }}</td>
                                 <td>
-                                    <a href="{{ route('admin.journals.show', $jurnal) }}" class="btn btn-sm btn-info">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('admin.journals.export-pdf', $jurnal) }}" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-file-pdf"></i>
-                                    </a>
+                                    @if($guru->sekolahProfile)
+                                        {{ $guru->sekolahProfile->nama_sekolah ?? '-' }}
+                                    @else
+                                        <span style="color: #64748b;">Belum setting sekolah</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                                        {{ $guru->teachingJournals->count() }} jurnal
+                                    </span>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center text-muted">
-                                    Belum ada data jurnal.
+                                <td colspan="4" class="text-center text-muted">
+                                    Belum ada data guru.
                                 </td>
                             </tr>
                             @endforelse

@@ -25,11 +25,20 @@
         }
 
         .main-content {
-            margin-left: 260px;
             flex: 1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Default: tanpa sidebar (untuk admin) */
+        .main-content {
+            margin-left: 0;
+        }
+
+        /* Untuk guru (dengan sidebar) */
+        .main-content.has-sidebar {
+            margin-left: 260px;
         }
 
         .page-content {
@@ -80,7 +89,7 @@
         }
 
         @media (max-width: 768px) {
-            .main-content {
+            .main-content.has-sidebar {
                 margin-left: 0;
             }
         }
@@ -92,12 +101,15 @@
 <body>
 
     <!-- ========================================== -->
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR (HANYA UNTUK GURU) -->
     <!-- ========================================== -->
     @auth
-        @if(Auth::user()->role === 'admin')
-            @include('admin.sidebar')
-        @else
+        @php
+            $isAdmin = Auth::user()->role === 'admin';
+            $isGuru = Auth::user()->role === 'guru';
+        @endphp
+
+        @if($isGuru)
             @include('guru.sidebar')
         @endif
     @endauth
@@ -105,13 +117,13 @@
     <!-- ========================================== -->
     <!-- MAIN CONTENT -->
     <!-- ========================================== -->
-    <div class="main-content">
+    <div class="main-content @auth @if(Auth::user()->role === 'guru') has-sidebar @endif @endauth">
 
         <!-- ========================================== -->
         <!-- HEADER -->
         <!-- ========================================== -->
         @auth
-            @if(Auth::user()->role === 'admin')
+            @if($isAdmin)
                 @include('admin.header')
             @else
                 @include('guru.header')
@@ -144,7 +156,7 @@
         <!-- FOOTER -->
         <!-- ========================================== -->
         @auth
-            @if(Auth::user()->role === 'admin')
+            @if($isAdmin)
                 @include('admin.footer')
             @else
                 @include('guru.footer')

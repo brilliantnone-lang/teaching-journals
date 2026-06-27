@@ -6,25 +6,24 @@ use App\Models\User;
 use App\Models\TeachingJournal;
 use App\Models\GuruProfile;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class AdminDashboardController extends Controller
 {
     public function index()
     {
-        // Total Pengguna
+        // ========================================== //
+        // DATA STATISTIK
+        // ========================================== //
+        
         $totalGuru = User::where('role', 'guru')->count();
         $totalAdmin = User::where('role', 'admin')->count();
         $totalUser = $totalGuru + $totalAdmin;
-        
-        // Total Jurnal
         $totalJurnal = TeachingJournal::count();
         $jurnalHariIni = TeachingJournal::whereDate('date', now())->count();
         $jurnalBulanIni = TeachingJournal::whereMonth('date', now()->month)
                             ->whereYear('date', now()->year)
                             ->count();
         
-        // Guru Aktif
         $guruAktif = GuruProfile::whereHas('teachingJournals')->count();
         $guruTidakAktif = $totalGuru - $guruAktif;
         
@@ -48,10 +47,16 @@ class AdminDashboardController extends Controller
                             ->limit(5)
                             ->get();
         
-        // Jurnal Terbaru
+        // Jurnal Terbaru (5 data)
         $jurnalTerbaru = TeachingJournal::with('guruProfile')
                             ->latest()
                             ->take(5)
+                            ->get();
+
+        // ========================================== //
+        // DAFTAR GURU & JUMLAH JURNAL
+        // ========================================== //
+        $daftarGuru = GuruProfile::with(['teachingJournals', 'sekolahProfile'])
                             ->get();
 
         return view('admin.dashboard', compact(
@@ -65,7 +70,8 @@ class AdminDashboardController extends Controller
             'guruTidakAktif',
             'bulanStatistik',
             'mapelStatistik',
-            'jurnalTerbaru'
+            'jurnalTerbaru',
+            'daftarGuru'
         ));
     }
 }

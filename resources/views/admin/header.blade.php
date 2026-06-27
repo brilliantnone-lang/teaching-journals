@@ -2,9 +2,6 @@
 <header class="header">
     <div class="header-container">
         <div class="header-left">
-            <button class="sidebar-toggle" id="sidebarToggle">
-                <i class="fas fa-bars"></i>
-            </button>
             <div class="brand">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Jurnal Mengajar</span>
@@ -53,23 +50,6 @@
         display: flex;
         align-items: center;
         gap: 16px;
-    }
-
-    .sidebar-toggle {
-        background: transparent;
-        border: none;
-        color: #94a3b8;
-        font-size: 1.2rem;
-        cursor: pointer;
-        padding: 4px 8px;
-        border-radius: 8px;
-        transition: all 0.3s;
-        display: none;
-    }
-
-    .sidebar-toggle:hover {
-        background: rgba(255, 255, 255, 0.05);
-        color: #f8fafc;
     }
 
     .brand {
@@ -148,9 +128,6 @@
     }
 
     @media (max-width: 768px) {
-        .sidebar-toggle {
-            display: block;
-        }
         .user-info .user-name {
             display: none;
         }
@@ -165,16 +142,3 @@
         }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleBtn = document.getElementById('sidebarToggle');
-        const sidebar = document.querySelector('.sidebar');
-
-        if (toggleBtn && sidebar) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('open');
-            });
-        }
-    });
-</script>

@@ -6,8 +6,7 @@ use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\TeachingJournalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruProfileController;
-use App\Http\Controllers\AdminJournalController; 
-use App\Http\Controllers\SekolahProfileController; 
+use App\Http\Controllers\SekolahProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,10 +41,6 @@ Route::middleware(['auth'])->group(function () {
 // ========================================== //
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-
-    Route::get('/journals', [AdminJournalController::class, 'index'])->name('journals.index');
-    Route::get('/journals/{journal}', [AdminJournalController::class, 'show'])->name('journals.show');
-    Route::get('/journals/{journal}/export-pdf', [AdminJournalController::class, 'exportPdf'])->name('journals.export-pdf');
 });
 
 // ========================================== //
