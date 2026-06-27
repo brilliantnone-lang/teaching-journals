@@ -1,7 +1,6 @@
 <!-- Header Admin -->
 <header class="header">
     <div class="header-container">
-        <!-- Left: Brand & Toggle -->
         <div class="header-left">
             <button class="sidebar-toggle" id="sidebarToggle">
                 <i class="fas fa-bars"></i>
@@ -12,7 +11,6 @@
             </div>
         </div>
 
-        <!-- Right: User Info -->
         <div class="header-right">
             <div class="user-info">
                 <div class="avatar">
@@ -25,7 +23,6 @@
                     </div>
                 </div>
             </div>
-            <!-- TOMBOL LOGOUT - BUKA MODAL -->
             <button type="button" class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </button>
@@ -34,7 +31,6 @@
 </header>
 
 <style>
-    /* CSS sama seperti sebelumnya */
     .header {
         background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);

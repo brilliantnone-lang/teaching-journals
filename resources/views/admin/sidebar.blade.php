@@ -13,58 +13,8 @@
             </a>
         </li>
         <li>
-            <!-- ✅ UBAH: admin.journals.index -->
             <a href="{{ route('admin.journals.index') }}" class="{{ request()->routeIs('admin.journals.*') ? 'active' : '' }}">
-                <i class="fas fa-book"></i> Semua Jurnal
-                <span class="badge">{{ \App\Models\TeachingJournal::count() }}</span>
-            </a>
-        </li>
-
-        <li class="menu-label">Manajemen</li>
-        <li>
-            <a href="#">
-                <i class="fas fa-users"></i> Data Guru
-                <span class="badge">{{ \App\Models\User::where('role', 'guru')->count() }}</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-user-cog"></i> Data Admin
-                <span class="badge">{{ \App\Models\User::where('role', 'admin')->count() }}</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-school"></i> Kelas
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-book-open"></i> Mata Pelajaran
-            </a>
-        </li>
-
-        <li class="menu-label">Laporan</li>
-        <li>
-            <a href="#">
-                <i class="fas fa-chart-bar"></i> Statistik
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-file-pdf"></i> Export Laporan
-            </a>
-        </li>
-
-        <li class="menu-label">Sistem</li>
-        <li>
-            <a href="#">
-                <i class="fas fa-cog"></i> Pengaturan
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-user"></i> Profil Saya
+                <i class="fas fa-book"></i> Catatan Perbaikan
             </a>
         </li>
     </ul>
@@ -177,21 +127,6 @@
         color: #f8fafc;
     }
 
-    .sidebar-menu li a .badge {
-        margin-left: auto;
-        background: #4361ee;
-        color: white;
-        padding: 2px 10px;
-        border-radius: 20px;
-        font-size: 0.65rem;
-        font-weight: 600;
-    }
-
-    .sidebar-menu li a:hover .badge {
-        background: #4cc9f0;
-        color: #0f172a;
-    }
-
     @media (max-width: 768px) {
         .sidebar {
             transform: translateX(-100%);
@@ -212,7 +147,7 @@
             z-index: 998;
         }
 
-        .sidebar.open ~ .sidebar-overlay {
+        .sidebar.open~.sidebar-overlay {
             display: block;
         }
     }
