@@ -234,15 +234,6 @@
                                         <a href="{{ route('guru.journals.export-pdf', $jurnal) }}?without_note=true" class="btn btn-sm btn-danger" title="PDF Tanpa Catatan">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
-                                        <button type="button" class="btn btn-sm btn-delete"
-                                                style="background: rgba(239, 68, 68, 0.1); color: #f87171; border: none; border-radius: 8px; padding: 6px 12px;"
-                                                data-url="{{ route('guru.journals.destroy', $jurnal) }}"
-                                                data-teacher="{{ $jurnal->teacher_name }}"
-                                                data-class="{{ $jurnal->class }}"
-                                                data-date="{{ \Carbon\Carbon::parse($jurnal->date)->format('d-m-Y') }}"
-                                                title="Hapus Jurnal">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
                                     </div>
                                 </td>
                             </tr>
