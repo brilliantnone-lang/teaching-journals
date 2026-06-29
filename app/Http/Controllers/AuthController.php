@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\RateLimiterTrait;
 use App\Traits\LogActivityTrait;
+use App\Services\ReCaptchaService;
 
 class AuthController extends Controller
 {
@@ -18,8 +19,21 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(Request $request, ReCaptchaService $recaptcha)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'g-recaptcha-response' => 'required',
+        ]);
+
+        // 2. Verifikasi captcha
+        if (!$recaptcha->verify($request->input('g-recaptcha-response'))) {
+            return back()
+                ->withInput($request->only('email'))
+                ->with('error', 'Verifikasi captcha gagal. Silakan coba lagi.');
+        }
+
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -39,7 +53,7 @@ class AuthController extends Controller
 
         $remember = $request->has('remember') ? true : false;
 
-        if (Auth::attempt($credentials, $remember)) { 
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             $this->clearLoginAttempts($key);
@@ -64,8 +78,22 @@ class AuthController extends Controller
             ->with('error', 'Email atau password salah.');
     }
 
-    public function register(Request $request)
+    public function register(Request $request, ReCaptchaService $recaptcha)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'g-recaptcha-response' => 'required',
+        ]);
+
+        // 2. Verifikasi captcha
+        if (!$recaptcha->verify($request->input('g-recaptcha-response'))) {
+            return back()
+                ->withInput($request->all())
+                ->with('error', 'Verifikasi captcha gagal. Silakan coba lagi.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
@@ -93,7 +121,7 @@ class AuthController extends Controller
         $user = Auth::user();
 
         $this->logActivity('logout', 'Logout untuk user: ' . ($user ? $user->email : 'unknown'));
-              
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

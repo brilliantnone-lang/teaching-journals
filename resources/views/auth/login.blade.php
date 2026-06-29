@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
         :root {
             --primary: #4361ee;
@@ -552,6 +554,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                    @error('g-recaptcha-response')
+                    <div style="color: #f87171; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <button class="btn-main">
                     Buat Akun <i class="fas fa-arrow-right"></i>
                 </button>
@@ -607,6 +616,13 @@
                     <label for="remember" style="color: var(--text-muted); font-size: 0.85rem; cursor: pointer;">
                         Ingat Saya
                     </label>
+                </div>
+
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                    @error('g-recaptcha-response')
+                    <div style="color: #f87171; font-size: 0.8rem; margin-top: 5px;">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button class="btn-main" style="margin-top: 10px;">
