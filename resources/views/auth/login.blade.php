@@ -423,7 +423,10 @@
             margin-bottom: 15px;
         }
 
-        /* --- RESPONSIVE --- */
+        .mobile-nav-btn {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .auth-container {
                 flex-direction: column;
@@ -463,7 +466,7 @@
             }
 
             .mobile-nav-btn {
-                display: block;
+                display: block !important;
                 margin-top: 20px;
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid var(--glass-border);
@@ -472,11 +475,20 @@
                 border-radius: 10px;
                 width: 100%;
                 cursor: pointer;
+                text-align: center;
+                font-size: 0.9rem;
+                font-weight: 500;
+                transition: background 0.3s, color 0.3s;
             }
-        }
 
-        .mobile-nav-btn {
-            display: none;
+            .mobile-nav-btn:hover {
+                background: rgba(255, 255, 255, 0.12);
+                color: #f8fafc;
+            }
+
+            .mobile-nav-btn:active {
+                transform: scale(0.98);
+            }
         }
     </style>
 </head>
@@ -545,7 +557,7 @@
                 </button>
             </form>
 
-            <button class="mobile-nav-btn" id="mobileSignIn">Sudah punya akun? Masuk</button>
+            <button class="mobile-nav-btn" id="mobileSignIn">🔑 Sudah punya akun? Masuk</button>
         </div>
 
         <div class="form-container sign-in-container">
@@ -602,7 +614,7 @@
                 </button>
             </form>
 
-            <button class="mobile-nav-btn" id="mobileSignUp">Belum punya akun? Daftar</button>
+            <button class="mobile-nav-btn" id="mobileSignUp">📝 Belum punya akun? Daftar</button>
         </div>
 
         <div class="overlay-container">
