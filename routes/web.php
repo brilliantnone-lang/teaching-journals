@@ -9,6 +9,12 @@ use App\Http\Controllers\GuruProfileController;
 use App\Http\Controllers\SekolahProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Cache\RateLimiting\Limit;  
+use Illuminate\Support\Facades\RateLimiter;
+
+RateLimiter::for('login', function ($job) {
+    return Limit::perMinute(10); 
+});
 
 // ========================================== //
 // GUEST ROUTES
@@ -25,7 +31,9 @@ Route::get('/', function () {
 // AUTH ROUTES
 // ========================================== //
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('login.post')
+    ->middleware('throttle:login');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

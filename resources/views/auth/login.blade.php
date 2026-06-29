@@ -31,7 +31,7 @@
 
         body {
             background-color: var(--dark-bg);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
                 radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
@@ -86,24 +86,39 @@
         }
 
         @keyframes orbFloat1 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 60px) scale(1.1); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(40px, 60px) scale(1.1);
+            }
         }
 
         @keyframes orbFloat2 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-50px, 30px) scale(1.05); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-50px, 30px) scale(1.05);
+            }
         }
 
         @keyframes orbFloat3 {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-40%, -60%) rotate(360deg); }
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-40%, -60%) rotate(360deg);
+            }
         }
 
         .auth-container {
             width: 850px;
             max-width: 95%;
-            min-height: 550px; 
+            min-height: 550px;
             background: var(--card-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -155,8 +170,18 @@
         }
 
         @keyframes show {
-            0%, 49.99% { opacity: 0; z-index: 1; }
-            50%, 100% { opacity: 1; z-index: 5; }
+
+            0%,
+            49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 1;
+                z-index: 5;
+            }
         }
 
         .overlay-container {
@@ -188,7 +213,7 @@
             transition: transform 0.6s ease-in-out;
             display: flex;
             align-items: center;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.2);
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
         }
 
         .auth-container.right-panel-active .overlay {
@@ -210,18 +235,29 @@
             transition: transform 0.6s ease-in-out;
         }
 
-        .overlay-left { transform: translateX(-20%); }
-        .auth-container.right-panel-active .overlay-left { transform: translateX(0); }
+        .overlay-left {
+            transform: translateX(-20%);
+        }
 
-        .overlay-right { right: 0; transform: translateX(0); }
-        .auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
+        .auth-container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .auth-container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
 
         /* --- TYPOGRAPHY --- */
         h1 {
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         h2 {
@@ -232,7 +268,7 @@
 
         p {
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.85);
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
@@ -252,7 +288,6 @@
             font-size: 1.2rem;
         }
 
-        /* --- INPUTS --- */
         .form-group {
             margin-bottom: 15px;
         }
@@ -331,15 +366,15 @@
             box-shadow: 0 20px 40px -10px rgba(67, 97, 238, 0.7);
             filter: brightness(1.1);
         }
-        
+
         .btn-main i {
             margin-left: 8px;
         }
 
         .btn-ghost {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             padding: 10px 30px;
             border-radius: 12px;
@@ -349,9 +384,9 @@
         }
 
         .btn-ghost:hover {
-            background: rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .forgot-link {
@@ -363,8 +398,10 @@
             text-align: center;
             transition: 0.3s;
         }
-        
-        .forgot-link:hover { color: var(--accent); }
+
+        .forgot-link:hover {
+            color: var(--accent);
+        }
 
         .alert-error {
             background: rgba(239, 68, 68, 0.15);
@@ -398,7 +435,8 @@
                 overflow-y: auto;
             }
 
-            .sign-in-container, .sign-up-container {
+            .sign-in-container,
+            .sign-up-container {
                 width: 100%;
                 position: relative;
                 opacity: 1;
@@ -408,16 +446,26 @@
                 min-height: 100vh;
             }
 
-            .sign-up-container { display: none; }
-            .auth-container.right-panel-active .sign-up-container { display: flex; }
-            .auth-container.right-panel-active .sign-in-container { display: none; }
-            
-            .overlay-container { display: none; }
-            
+            .sign-up-container {
+                display: none;
+            }
+
+            .auth-container.right-panel-active .sign-up-container {
+                display: flex;
+            }
+
+            .auth-container.right-panel-active .sign-in-container {
+                display: none;
+            }
+
+            .overlay-container {
+                display: none;
+            }
+
             .mobile-nav-btn {
                 display: block;
                 margin-top: 20px;
-                background: rgba(255,255,255,0.05);
+                background: rgba(255, 255, 255, 0.05);
                 border: 1px solid var(--glass-border);
                 color: var(--text-white);
                 padding: 12px;
@@ -426,8 +474,10 @@
                 cursor: pointer;
             }
         }
-        
-        .mobile-nav-btn { display: none; }
+
+        .mobile-nav-btn {
+            display: none;
+        }
     </style>
 </head>
 
@@ -441,18 +491,18 @@
             <div class="brand">
                 <i class="fas fa-chalkboard-teacher"></i> Jurnal Mengajar
             </div>
-            
+
             <h2>Daftar Akun Guru</h2>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">
                 Bergabung untuk mulai mencatat jurnal mengajar secara digital.
             </p>
 
             @if(session('success'))
-                <div class="alert-success">{{ session('success') }}</div>
+            <div class="alert-success">{{ session('success') }}</div>
             @endif
 
             @if($errors->any())
-                <div class="alert-error">{{ $errors->first() }}</div>
+            <div class="alert-error">{{ $errors->first() }}</div>
             @endif
 
             <form action="{{ route('register.post') }}" method="POST">
@@ -494,7 +544,7 @@
                     Buat Akun <i class="fas fa-arrow-right"></i>
                 </button>
             </form>
-            
+
             <button class="mobile-nav-btn" id="mobileSignIn">Sudah punya akun? Masuk</button>
         </div>
 
@@ -508,12 +558,18 @@
                 Silakan masuk ke akun Anda untuk melanjutkan.
             </p>
 
-            @if(session('error'))
-                <div class="alert-error">{{ session('error') }}</div>
+            @if($errors->any())
+            <div class="alert-error">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                {{ $errors->first() }}
+            </div>
             @endif
 
-            @if($errors->any())
-                <div class="alert-error">{{ $errors->first() }}</div>
+            @if(session('error'))
+            <div class="alert-error">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                {{ session('error') }}
+            </div>
             @endif
 
             <form action="{{ route('login.post') }}" method="POST">
@@ -534,6 +590,13 @@
                     </div>
                 </div>
 
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: -5px;">
+                    <input type="checkbox" name="remember" id="remember" style="accent-color: #4361ee; width: 16px; height: 16px; cursor: pointer;">
+                    <label for="remember" style="color: var(--text-muted); font-size: 0.85rem; cursor: pointer;">
+                        Ingat Saya
+                    </label>
+                </div>
+
                 <button class="btn-main" style="margin-top: 10px;">
                     Masuk Akun <i class="fas fa-sign-in-alt"></i>
                 </button>
@@ -549,7 +612,7 @@
                     <p>Untuk tetap terhubung dengan kami, silakan masuk dengan info pribadi Anda.</p>
                     <button class="btn-ghost" id="signIn">Masuk</button>
                 </div>
-                
+
                 <div class="overlay-panel overlay-right">
                     <h1>Halo, Teman Guru!</h1>
                     <p>Masukkan detail pribadi Anda dan mulailah perjalanan mengajar yang terorganisir.</p>
@@ -563,7 +626,7 @@
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
-        
+
         const mobileSignUp = document.getElementById('mobileSignUp');
         const mobileSignIn = document.getElementById('mobileSignIn');
 
@@ -575,12 +638,12 @@
             container.classList.remove("right-panel-active");
         });
 
-        if(mobileSignUp) {
+        if (mobileSignUp) {
             mobileSignUp.addEventListener('click', () => {
                 container.classList.add("right-panel-active");
             });
         }
-        if(mobileSignIn) {
+        if (mobileSignIn) {
             mobileSignIn.addEventListener('click', () => {
                 container.classList.remove("right-panel-active");
             });
