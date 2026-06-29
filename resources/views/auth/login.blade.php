@@ -264,6 +264,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 10px;
             transition: all 0.3s;
+            position: relative;
         }
 
         .form-group .input-group:focus-within {
@@ -276,6 +277,7 @@
             padding: 0 15px;
             color: var(--text-muted);
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
         .form-group .input-group input {
@@ -290,6 +292,21 @@
 
         .form-group .input-group input::placeholder {
             color: #475569;
+        }
+
+        .toggle-password {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .toggle-password:hover {
+            color: var(--text-white);
         }
 
         .btn-main {
@@ -452,16 +469,24 @@
                         <input type="email" name="email" placeholder="Alamat Email" value="{{ old('email') }}" required>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-lock"></i></span>
-                        <input type="password" name="password" placeholder="Buat Password" required>
+                        <input type="password" name="password" id="regPassword" placeholder="Buat Password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('regPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-check-circle"></i></span>
-                        <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                        <input type="password" name="password_confirmation" id="regPasswordConfirm" placeholder="Konfirmasi Password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('regPasswordConfirm', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -502,7 +527,10 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="icon"><i class="fas fa-lock"></i></span>
-                        <input type="password" name="password" placeholder="Password" required>
+                        <input type="password" name="password" id="loginPassword" placeholder="Password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -556,6 +584,21 @@
             mobileSignIn.addEventListener('click', () => {
                 container.classList.remove("right-panel-active");
             });
+        }
+
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
         }
     </script>
 </body>
