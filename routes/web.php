@@ -16,9 +16,6 @@ RateLimiter::for('login', function ($job) {
     return Limit::perMinute(10); 
 });
 
-// ========================================== //
-// GUEST ROUTES
-// ========================================== //
 Route::get('/splash', function () {
     return view('splash-screen');
 })->name('splash');
@@ -27,9 +24,6 @@ Route::get('/', function () {
     return redirect()->route('splash');
 });
 
-// ========================================== //
-// AUTH ROUTES
-// ========================================== //
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.post')
@@ -37,23 +31,14 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ========================================== //
-// PROTECTED ROUTES
-// ========================================== //
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-// ========================================== //
-// ADMIN ROUTES
-// ========================================== //
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 });
 
-// ========================================== //
-// GURU ROUTES
-// ========================================== //
 Route::middleware(['auth', 'guru'])->prefix('guru')->name('guru.')->group(function () {
     
     Route::get('/dashboard', [GuruDashboardController::class, 'index'])->name('dashboard');
