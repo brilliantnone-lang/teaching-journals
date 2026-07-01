@@ -11,10 +11,6 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        // ========================================== //
-        // DATA STATISTIK
-        // ========================================== //
-        
         $totalGuru = User::where('role', 'guru')->count();
         $totalAdmin = User::where('role', 'admin')->count();
         $totalUser = $totalGuru + $totalAdmin;
@@ -40,22 +36,17 @@ class AdminDashboardController extends Controller
             ]);
         }
         
-        // Top 5 Mata Pelajaran
         $mapelStatistik = TeachingJournal::selectRaw('subject, count(*) as total')
                             ->groupBy('subject')
                             ->orderBy('total', 'desc')
                             ->limit(5)
                             ->get();
-        
-        // Jurnal Terbaru (5 data)
+
         $jurnalTerbaru = TeachingJournal::with('guruProfile')
                             ->latest()
                             ->take(5)
                             ->get();
 
-        // ========================================== //
-        // DAFTAR GURU & JUMLAH JURNAL
-        // ========================================== //
         $daftarGuru = GuruProfile::with(['teachingJournals', 'sekolahProfile'])
                             ->get();
 
