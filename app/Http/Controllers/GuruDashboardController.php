@@ -35,7 +35,6 @@ class GuruDashboardController extends Controller
 
         $journals = $query->orderBy('date', 'desc')->get();
 
-        // ✅ HITUNG TOTAL JURNAL
         $totalJurnal = TeachingJournal::where('guru_profile_id', $profile->id)->count();
 
         return view('guru.dashboard', compact(
