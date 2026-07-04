@@ -31,12 +31,8 @@ class TeachingJournal extends Model
         'catatan_kepsek',
         'photo1',
         'photo2',
-        'guru_profile_id',  // TAMBAHKAN INI
+        'guru_profile_id',  
     ];
-
-    // ========================================== //
-    // RELASI - HARUS ADA DI MODEL, BUKAN CONTROLLER
-    // ========================================== //
     
     public function guruProfile()
     {

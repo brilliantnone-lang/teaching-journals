@@ -24,7 +24,6 @@ class GuruProfile extends Model
         return $this->hasMany(TeachingJournal::class);
     }
 
-    // ✅ RELASI KE SEKOLAH PROFILE
     public function sekolahProfile()
     {
         return $this->hasOne(SekolahProfile::class);
