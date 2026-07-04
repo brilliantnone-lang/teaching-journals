@@ -7,7 +7,7 @@ use App\Models\GuruProfile;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;  // ✅ IMPORT STORAGE
+use Illuminate\Support\Facades\Storage;  
 
 class TeachingJournalController extends Controller
 {
