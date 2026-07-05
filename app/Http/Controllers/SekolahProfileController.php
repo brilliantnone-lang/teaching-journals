@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class SekolahProfileController extends Controller
 {
+    private function sanitizeFileName($filename)
+    {
+        $filename = str_replace(' ', '_', $filename);
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '', $filename);
+        return $filename;
+    }
+
     public function index()
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
@@ -51,16 +58,34 @@ class SekolahProfileController extends Controller
 
         if ($request->hasFile('logo_kiri')) {
             if ($sekolah && $sekolah->logo_kiri) {
-                Storage::disk('public')->delete($sekolah->logo_kiri);
+                $oldPath = public_path('storage/' . $sekolah->logo_kiri);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
             }
-            $validated['logo_kiri'] = $request->file('logo_kiri')->store('logos', 'public');
+            $file = $request->file('logo_kiri');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $safeName = $this->sanitizeFileName($originalName);
+            $filename = time() . '_' . $safeName . '.' . $extension;
+            $file->move(public_path('storage/logos'), $filename);
+            $validated['logo_kiri'] = 'logos/' . $filename;
         }
 
         if ($request->hasFile('logo_kanan')) {
             if ($sekolah && $sekolah->logo_kanan) {
-                Storage::disk('public')->delete($sekolah->logo_kanan);
+                $oldPath = public_path('storage/' . $sekolah->logo_kanan);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
             }
-            $validated['logo_kanan'] = $request->file('logo_kanan')->store('logos', 'public');
+            $file = $request->file('logo_kanan');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $safeName = $this->sanitizeFileName($originalName);
+            $filename = time() . '_' . $safeName . '.' . $extension;
+            $file->move(public_path('storage/logos'), $filename);
+            $validated['logo_kanan'] = 'logos/' . $filename;
         }
 
         if ($sekolah) {
