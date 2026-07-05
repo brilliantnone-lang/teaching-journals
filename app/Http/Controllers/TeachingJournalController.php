@@ -7,10 +7,17 @@ use App\Models\GuruProfile;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;  
+use Illuminate\Support\Facades\Storage;
 
 class TeachingJournalController extends Controller
 {
+    private function sanitizeFileName($filename)
+    {
+        $filename = str_replace(' ', '_', $filename);
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '', $filename);
+        return $filename;
+    }
+
     public function index()
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
@@ -60,17 +67,29 @@ class TeachingJournalController extends Controller
             'sick_names' => 'nullable|string',
             'absent_names' => 'nullable|string',
             'notes' => 'nullable|string',
-            'catatan_kepsek' => 'nullable|string', 
+            'catatan_kepsek' => 'nullable|string',
             'photo1' => 'nullable|image|max:2048',
             'photo2' => 'nullable|image|max:2048',
         ]);
 
-        // Handle file uploads
         if ($request->hasFile('photo1')) {
-            $validated['photo1'] = $request->file('photo1')->store('photos', 'public');
+            $file = $request->file('photo1');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $safeName = $this->sanitizeFileName($originalName);
+            $filename = time() . '_1_' . $safeName . '.' . $extension;
+            $path = $file->storeAs('photos', $filename, 'public');
+            $validated['photo1'] = $path;
         }
+
         if ($request->hasFile('photo2')) {
-            $validated['photo2'] = $request->file('photo2')->store('photos', 'public');
+            $file = $request->file('photo2');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $safeName = $this->sanitizeFileName($originalName);
+            $filename = time() . '_2_' . $safeName . '.' . $extension;
+            $path = $file->storeAs('photos', $filename, 'public');
+            $validated['photo2'] = $path;
         }
 
         $profile = GuruProfile::where('user_id', Auth::id())->first();
@@ -101,9 +120,6 @@ class TeachingJournalController extends Controller
         return view('guru.journals.show', compact('journal'));
     }
 
-    // ========================================== //
-    // EXPORT PDF - DENGAN 2 OPSI
-    // ========================================== //
     public function exportPdf(TeachingJournal $journal)
     {
         $profile = GuruProfile::where('user_id', Auth::id())->first();
@@ -112,7 +128,6 @@ class TeachingJournalController extends Controller
             abort(403, 'Anda tidak memiliki akses ke jurnal ini.');
         }
 
-        // Cek parameter: dengan atau tanpa catatan
         $withNote = !request()->has('without_note');
 
         $pdf = Pdf::loadView('guru.journals.pdf', compact('journal', 'withNote'));
@@ -125,7 +140,6 @@ class TeachingJournalController extends Controller
 
         return $pdf->download($filename);
     }
-
 
     public function edit(TeachingJournal $journal)
     {
@@ -171,18 +185,30 @@ class TeachingJournalController extends Controller
             'photo2' => 'nullable|image|max:2048',
         ]);
 
-        // Handle file uploads
         if ($request->hasFile('photo1')) {
             if ($journal->photo1) {
-                Storage::disk('public')->delete($journal->photo1);  // ✅ SEKARANG TIDAK MERAH
+                Storage::disk('public')->delete($journal->photo1);
             }
-            $validated['photo1'] = $request->file('photo1')->store('photos', 'public');
+            $file = $request->file('photo1');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $safeName = $this->sanitizeFileName($originalName);
+            $filename = time() . '_1_' . $safeName . '.' . $extension;
+            $path = $file->storeAs('photos', $filename, 'public');
+            $validated['photo1'] = $path;
         }
+
         if ($request->hasFile('photo2')) {
             if ($journal->photo2) {
-                Storage::disk('public')->delete($journal->photo2);  // ✅ SEKARANG TIDAK MERAH
+                Storage::disk('public')->delete($journal->photo2);
             }
-            $validated['photo2'] = $request->file('photo2')->store('photos', 'public');
+            $file = $request->file('photo2');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $safeName = $this->sanitizeFileName($originalName);
+            $filename = time() . '_2_' . $safeName . '.' . $extension;
+            $path = $file->storeAs('photos', $filename, 'public');
+            $validated['photo2'] = $path;
         }
 
         $journal->update($validated);
@@ -200,10 +226,10 @@ class TeachingJournalController extends Controller
         }
 
         if ($journal->photo1) {
-            Storage::disk('public')->delete($journal->photo1);  // ✅ SEKARANG TIDAK MERAH
+            Storage::disk('public')->delete($journal->photo1);
         }
         if ($journal->photo2) {
-            Storage::disk('public')->delete($journal->photo2);  // ✅ SEKARANG TIDAK MERAH
+            Storage::disk('public')->delete($journal->photo2);
         }
 
         $journal->delete();
@@ -211,12 +237,9 @@ class TeachingJournalController extends Controller
         return redirect()->route('guru.journals.index')
             ->with('success', 'Jurnal berhasil dihapus!');
     }
-    // ========================================== //
-    // UPDATE CATATAN KEPALA SEKOLAH
-    // ========================================== //
+
     public function updateCatatan(Request $request, TeachingJournal $journal)
     {
-        // Cek akses: hanya admin atau guru yang bersangkutan
         $profile = GuruProfile::where('user_id', Auth::id())->first();
 
         if (!$profile || $journal->guru_profile_id !== $profile->id) {
