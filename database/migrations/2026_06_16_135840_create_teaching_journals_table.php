@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('teaching_journals', function (Blueprint $table) {
             $table->id();
             
-            // Data Guru
             $table->string('teacher_name');
             $table->string('nip');
             $table->string('class');
@@ -20,15 +19,13 @@ return new class extends Migration
             $table->string('day');
             $table->date('date');
             
-            // Materi & Jadwal
             $table->text('material');
             $table->string('lesson_start');
             $table->string('lesson_end');
             $table->time('time_start');
             $table->time('time_end');
             $table->text('learning_activity');
-            
-            // Presensi
+        
             $table->integer('present')->default(0);
             $table->integer('permit')->default(0);
             $table->integer('sick')->default(0);
@@ -37,7 +34,6 @@ return new class extends Migration
             $table->text('sick_names')->nullable();
             $table->text('absent_names')->nullable();
             
-            // Catatan & Foto
             $table->text('notes')->nullable();
             $table->string('photo1')->nullable();
             $table->string('photo2')->nullable();
